@@ -5,6 +5,7 @@ import pg from 'pg';
 import {randomUUID,randomBytes} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {hashPassword,verifyPassword,registrationErrors,tokenHash} from './auth.mjs';
+import {profileErrors} from './profile.mjs';
 const production=process.env.NODE_ENV==='production';
 if(!process.env.DATABASE_URL)throw new Error('Configure DATABASE_URL antes de iniciar.');
 const origin=new URL(process.env.APP_ORIGIN||'http://localhost:3000').origin;
@@ -29,6 +30,9 @@ const dummyHash=await hashPassword(randomBytes(32).toString('hex'));
 app.post('/api/auth/login',authLimiter,async(req,res)=>{const {email,password}=req.body||{};if(typeof email!=='string'||email.length>254||typeof password!=='string'||password.length>128)return res.status(422).json({message:'Informe e-mail e senha válidos.'});const {rows}=await pool.query('SELECT id,name,email,password_hash FROM users WHERE email=$1',[email.trim().toLowerCase()]);const user=rows[0];const valid=await verifyPassword(password,user?.password_hash||dummyHash);if(!user||!valid)return res.status(401).json({message:'E-mail ou senha incorretos.'});const token=randomBytes(32).toString('hex');const old=sessionToken(req);const client=await pool.connect();try{await client.query('BEGIN');if(old)await client.query('DELETE FROM sessions WHERE token_hash=$1',[tokenHash(old)]);await client.query("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES($1,$2,now()+interval '8 hours')",[tokenHash(token),user.id]);await client.query('COMMIT');}catch(e){await client.query('ROLLBACK');throw e;}finally{client.release();}res.cookie(cookieName,token,cookieOptions);res.json({user:{id:user.id,name:user.name,email:user.email}});});
 app.get('/api/auth/me',requireUser,(req,res)=>res.json({user:req.user}));
 app.post('/api/auth/logout',async(req,res)=>{const token=sessionToken(req);if(token)await pool.query('DELETE FROM sessions WHERE token_hash=$1',[tokenHash(token)]);res.clearCookie(cookieName,{httpOnly:true,secure:production,sameSite:'strict',path:'/'});res.sendStatus(204);});
+// Proprietária determinada pela sessão; nenhum user_id enviado é utilizado.
+app.get('/api/profile',requireUser,async(req,res)=>{const {rows}=await pool.query("SELECT to_char(dum,'YYYY-MM-DD') AS dum,notes,updated_at FROM gestational_profiles WHERE user_id=$1",[req.user.id]);res.json({profile:rows[0]||{dum:null,notes:'',updated_at:null}});});
+app.post('/api/profile',requireUser,async(req,res)=>{const errors=profileErrors(req.body);if(Object.keys(errors).length)return res.status(422).json({message:'Revise os campos indicados.',errors});const {dum,notes}=req.body;const {rows}=await pool.query("INSERT INTO gestational_profiles(user_id,dum,notes) VALUES($1,$2,$3) ON CONFLICT(user_id) DO UPDATE SET dum=EXCLUDED.dum,notes=EXCLUDED.notes,updated_at=now() RETURNING to_char(dum,'YYYY-MM-DD') AS dum,notes,updated_at",[req.user.id,dum||null,notes]);res.json({profile:rows[0]});});
 // Entrada autenticada; index.html conserva a demonstração independente.
 app.get('/',(_req,res)=>res.redirect('/login.html'));
 app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url))));
