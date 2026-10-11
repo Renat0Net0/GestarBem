@@ -58,3 +58,11 @@ DOM recebe texto sem interpolação HTML. Campos têm rótulos, mensagens por ca
 Dezesseis testes unitários passaram (autenticação, perfil, agenda e registros); sintaxe verificada. Teste de proprietária dos registros usa banco simulado, não substitui integração real. Migração, persistência e isolamento dos novos registros precisam dos testes acima no PostgreSQL do usuário. Validação visual e conformidade WCAG completa continuam pendentes.
 
 Usuário confirmou nas etapas anteriores perfil persistente e separado entre duas contas; CRUD da agenda, correção de acentos e bloqueio de agendamentos no passado. Novos registros ainda não foram confirmados pelo usuário. Notificações, regras clínicas, IA e logs de auditoria permanecem pendentes. O site estático publicado continua demonstração sem essa API local.
+
+## Campos adaptados ao tipo
+
+O tipo é o primeiro controle do formulário e recebe foco ao abrir. Peso usa campo numérico positivo, duas casas decimais e unidade kg fixa. Pressão arterial usa dois inteiros positivos de até três dígitos, com rótulos sistólica e diastólica e mmHg; valor serializado como primeiro/segundo mmHg. Esses limites são de formato, não classificação clínica. Outros tipos usam texto com rótulos e exemplos próprios; medicamento permanece livre pois as unidades variam conforme a prescrição.
+
+Servidor valida formato e unidade de peso e pressão. Banco conserva value em texto, sem nova migração. Edição reconhece formatos anteriores como 68 kg, 68,5 kg e 120/80 mmHg. Se um registro antigo não puder ser convertido, seu valor original aparece na ajuda e os campos numéricos precisam ser preenchidos para salvar; não há conversão clínica ou alteração automática no banco. Mudar de tipo limpa os campos de valor para evitar reutilizar uma medição incompatível.
+
+Atualizar frontend/records.html, frontend/records.js, backend/records.mjs e backend/records.test.mjs, reiniciar backend e Ctrl+F5. Dezessete testes unitários passaram; teste visual e de leitor de tela deste formulário adaptado ainda pendente. Conferir escolha do tipo primeiro, peso decimal e kg, dois valores de pressão e mmHg, edição de registros anteriores e preservação de dados quando a validação falhar.

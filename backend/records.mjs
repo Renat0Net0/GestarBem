@@ -4,6 +4,8 @@ export const recordTypes=['Peso','Pressão arterial','Sintoma','Medicamento','Co
 export function recordErrors(body,today=agendaToday()){
  if(!body||typeof body!=='object'||Array.isArray(body))return {value:'Preencha os dados do registro.'};const errors={};
  if(typeof body.value!=='string'||!body.value.trim()||body.value.length>200)errors.value='Informe uma descrição ou valor com unidade de até 200 caracteres.';
+ if(!errors.value&&body.type==='Peso'&&(!/^\d+(?:[.,]\d{1,2})? kg$/.test(body.value)||Number(body.value.split(' ')[0].replace(',','.'))<=0))errors.value='Informe um peso positivo em kg, com até duas casas decimais.';
+ if(!errors.value&&body.type==='Pressão arterial'){const m=body.value.match(/^(\d{1,3})\/(\d{1,3}) mmHg$/);if(!m||Number(m[1])<=0||Number(m[2])<=0)errors.value='Informe os dois valores numéricos da pressão em mmHg.';}
  if(!recordTypes.includes(body.type))errors.type='Escolha um tipo da lista.';
  const d=typeof body.date==='string'?new Date(body.date+'T12:00:00Z'):new Date(NaN);
  if(typeof body.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(body.date)||!Number.isFinite(d.getTime())||d.toISOString().slice(0,10)!==body.date||body.date<'1900-01-01')errors.date='Informe uma data válida a partir de 1900.';
