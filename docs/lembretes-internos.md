@@ -60,3 +60,7 @@ Dezenove testes unitários passaram (18 existentes/validação mais rota de lemb
 Painel, agenda e registros compartilham o card de lembretes na lateral direita. Usa position sticky, permanecendo visível ao rolar o conteúdo em telas maiores. Se houver muitos avisos, a lateral tem rolagem própria para preservar acesso a todos. Até 1000px a lateral fica acima do conteúdo e acompanha a rolagem normal para evitar ocupar a tela pequena. Mantém consulta autenticada, marcar como visto e persistência. Nenhum comportamento da API mudou.
 
 Atualizar frontend/account.html, frontend/agenda.html, frontend/records.html e frontend/dashboard.css; manter reminders.js da etapa anterior. Ctrl+F5, sem migração nem reinício. Conferir nas três páginas, rolagem, muitos lembretes, teclado e tela pequena. IDs foram preservados; revisão visual em navegador local permanece necessária. Usuário confirmou o fluxo anterior de aparecer no painel e marcar como visto com persistência.
+
+## Ocultar lateral vazia
+
+Após consulta bem-sucedida sem avisos pendentes, a lateral desaparece e o conteúdo ocupa toda a largura. Marcar o último aviso como visto faz o mesmo. Novos avisos aparecem na próxima consulta ao abrir/recarregar a página. Falha na consulta mostra a lateral com mensagem e nova tentativa, pois erro não significa ausência de lembretes. Atualizar reminders.js e dashboard.css. Verificar conta vazia, último aviso visto, novo aviso e erro de API.
