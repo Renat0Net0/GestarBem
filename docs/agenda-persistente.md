@@ -61,3 +61,9 @@ Nenhum user_id enviado é utilizado. SELECT filtra req.user.id; UPDATE e DELETE 
 Onze testes unitários passaram: autenticação, perfil e agenda. Testes de agenda validam campos e o uso da proprietária da sessão nas rotas com banco simulado. Sintaxe JavaScript verificada. Não substituem execução de migração e testes HTTP com PostgreSQL real, ainda pendentes nesta etapa. Perfil anterior foi verificado pelo usuário: persistência após recarregar e ausência dos dados da primeira conta na segunda.
 
 Validação visual e WCAG completa pendentes. Não declarar conformidade AA a partir dos testes unitários. Site estático publicado mantém a demonstração; esta agenda funciona pelo backend local. Registros clínicos, lembretes, regras de atenção e IA ainda não estão ativos.
+
+## Correção de importação no Windows
+
+Erro PostgreSQL 23514 ao usar Vacinação ou Medição pode indicar que a regra gestational_events_type_check foi criada com codificação incorreta. A migração 003 agora utiliza escapes Unicode em SQL composto somente por ASCII. Para tabelas já criadas, aplicar somente database/004-agenda-types.sql: substitui a regra em uma transação, sem apagar ou alterar agendamentos. Se houver registros incompatíveis, a transação falha e preserva a regra anterior; investigar esses registros antes de prosseguir. Não repetir 003 em tabela existente.
+
+Após aplicar 004, testar Vacinação e Medição, recarregar e verificar persistência. Testar também que tipo desconhecido continua sendo recusado pelo servidor e banco. Essa correção ainda exige execução e confirmação no PostgreSQL local do usuário.
