@@ -5,6 +5,7 @@ import pg from 'pg';
 import {randomUUID,randomBytes} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {hashPassword,verifyPassword,registrationErrors,tokenHash} from './auth.mjs';
+import {registerAgenda} from './agenda.mjs';
 import {profileErrors} from './profile.mjs';
 const production=process.env.NODE_ENV==='production';
 if(!process.env.DATABASE_URL)throw new Error('Configure DATABASE_URL antes de iniciar.');
@@ -33,6 +34,7 @@ app.post('/api/auth/logout',async(req,res)=>{const token=sessionToken(req);if(to
 // Proprietária determinada pela sessão; nenhum user_id enviado é utilizado.
 app.get('/api/profile',requireUser,async(req,res)=>{const {rows}=await pool.query("SELECT to_char(dum,'YYYY-MM-DD') AS dum,notes,updated_at FROM gestational_profiles WHERE user_id=$1",[req.user.id]);res.json({profile:rows[0]||{dum:null,notes:'',updated_at:null}});});
 app.post('/api/profile',requireUser,async(req,res)=>{const errors=profileErrors(req.body);if(Object.keys(errors).length)return res.status(422).json({message:'Revise os campos indicados.',errors});const {dum,notes}=req.body;const {rows}=await pool.query("INSERT INTO gestational_profiles(user_id,dum,notes) VALUES($1,$2,$3) ON CONFLICT(user_id) DO UPDATE SET dum=EXCLUDED.dum,notes=EXCLUDED.notes,updated_at=now() RETURNING to_char(dum,'YYYY-MM-DD') AS dum,notes,updated_at",[req.user.id,dum||null,notes]);res.json({profile:rows[0]});});
+registerAgenda(app,pool,requireUser);
 // Entrada autenticada; index.html conserva a demonstração independente.
 app.get('/',(_req,res)=>res.redirect('/login.html'));
 app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url))));
