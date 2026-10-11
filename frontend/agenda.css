@@ -5,3 +5,9 @@
 .agenda-shell #events-list>.event h3{margin-bottom:10px}
 .agenda-shell #events-list>.event .actions{margin-top:16px;padding-top:14px;border-top:1px solid #e9dfef;gap:10px}
 @media(max-width:380px){.agenda-shell #events-list>.event{padding:16px}.agenda-shell #events-list>.event .actions button{flex:1 1 90px}}
+
+.agenda-shell .list-filters{min-width:0;margin:0 0 12px;padding:16px;border:1px solid var(--border);border-radius:12px}
+.agenda-shell .list-filters legend{padding:0 6px;font-weight:700}
+.agenda-shell .filter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-bottom:12px}
+.agenda-shell .filter-grid>div{min-width:0;display:grid;align-content:start;gap:4px}
+.agenda-shell .filter-grid input,.agenda-shell .filter-grid select{width:100%;min-height:44px}
