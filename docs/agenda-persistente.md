@@ -67,3 +67,7 @@ Validação visual e WCAG completa pendentes. Não declarar conformidade AA a pa
 Erro PostgreSQL 23514 ao usar Vacinação ou Medição pode indicar que a regra gestational_events_type_check foi criada com codificação incorreta. A migração 003 agora utiliza escapes Unicode em SQL composto somente por ASCII. Para tabelas já criadas, aplicar somente database/004-agenda-types.sql: substitui a regra em uma transação, sem apagar ou alterar agendamentos. Se houver registros incompatíveis, a transação falha e preserva a regra anterior; investigar esses registros antes de prosseguir. Não repetir 003 em tabela existente.
 
 Após aplicar 004, testar Vacinação e Medição, recarregar e verificar persistência. Testar também que tipo desconhecido continua sendo recusado pelo servidor e banco. Essa correção ainda exige execução e confirmação no PostgreSQL local do usuário.
+
+## Datas de agendamento
+
+Novos compromissos e edições do formulário exigem hoje ou uma data futura, considerando America/Manaus no servidor e navegador. O formulário recalcula a data mínima no envio, inclusive se ficar aberto durante a virada do dia. Horários anteriores no mesmo dia são permitidos. Concluir/reabrir compromissos que já passaram continua permitido quando somente o estado muda; alterar seus outros campos exige reagendamento para hoje ou futuro. Exclusão e consulta de histórico continuam disponíveis. Testar ontem (recusado), hoje e amanhã (aceitos), inclusive enviando diretamente à API. Não requer migração de banco.
