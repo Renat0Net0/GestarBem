@@ -9,8 +9,8 @@
  for(const activity of activities){
  const li=document.createElement('li');li.className='dashboard-item';
  const heading=document.createElement('h3');heading.textContent=(entities[activity.entityType]||'Item')+' '+(actions[activity.action]||'atualizado');
- const date=document.createElement('p');const when=new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Manaus',dateStyle:'short',timeStyle:'medium'}).format(new Date(activity.occurredAt));
- date.textContent=when+' (Manaus) — '+(activity.itemSummary||'Item excluído — detalhes indisponíveis.');
+ const date=document.createElement('p');const hasDescription=Object.hasOwn(activity,'itemSummary');const when=new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Manaus',dateStyle:'short',timeStyle:'medium'}).format(new Date(activity.occurredAt));
+ date.textContent=when+' (Manaus) — '+(activity.itemSummary||(hasDescription?'Item não encontrado — detalhes indisponíveis.':'Descrição indisponível: atualize o backend e reinicie o servidor.'));
  li.append(heading,date);
  if(activity.itemSummary){const note=document.createElement('p');note.className='soft';note.textContent='Dados atuais do item'+(activity.itemDate?' · Data do item: '+activity.itemDate.split('-').reverse().join('/'):'')+'.';li.append(note);}
  el('activity-list').append(li);}
