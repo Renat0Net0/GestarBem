@@ -19,3 +19,9 @@ Substituir frontend/agenda.html, agenda.js, records.html, records.js e agenda.cs
 - Limpar filtros e conferir todos os cards.
 - Concluir um item no filtro Agendados; conferir sua saída da lista e destino do foco.
 - Editar tipo ou valor de um item sob filtro; conferir nova lista e persistência após recarregar.
+
+## Consulta por período
+
+Agenda e registros oferecem Data inicial e Data final, combinadas com os filtros existentes. As datas dos limites são incluídas. Um campo vazio remove apenas aquele limite. Período invertido ou data inválida apresenta erro e solicita correção, sem ser confundido com ausência de resultados. Limpar filtros remove também as datas. Não há mudança de banco ou API.
+
+Atualizar os quatro arquivos: frontend/agenda.html, agenda.js, records.html e records.js. Não há alteração adicional de CSS nesta etapa. Conferir limites iguais, cada limite isolado, combinação com tipo/texto, período invertido e limpeza. Sintaxe, estrutura e lógica verificadas; teste manual de navegador pendente.
