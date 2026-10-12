@@ -1,6 +1,6 @@
 # Regras de atenção — proposta v1
 
-Estado: especificadas, ainda não implementadas. Pesquisa consultada em 11/10/2026.
+Estado: dez seleções e orientação integradas ao painel. Verificações locais de estrutura e lógica realizadas; validação manual visual, de acessibilidade e clínica pendente. Pesquisa consultada em 11/10/2026.
 
 ## Finalidade
 
@@ -52,3 +52,11 @@ Cada uma das dez seleções deve produzir a orientação; múltiplas seleções 
 **MS:** BRASIL. Ministério da Saúde. Caderneta Brasileira da Gestante. Seção 2.6, página impressa 28 (página 29 do arquivo PDF). Disponível em: https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-da-mulher/publicacoes/caderneta-brasileira-da-gestante.pdf. Acesso em: 11 out. 2026.
 
 **CDC:** Centers for Disease Control and Prevention. Urgent Maternal Warning Signs and Symptoms. HEAR HER Campaign. 15 maio 2024. Disponível em: https://www.cdc.gov/hearher/maternal-warning-signs/index.html. Acesso em: 11 out. 2026.
+
+## Integração local
+
+Atualizar frontend/account.html e dashboard.css; acrescentar frontend/attention.js. Recarregar com Ctrl+F5. Não há migração nem alteração de API. A seção fica antes do espaço de IA; os lembretes mantêm seu próprio card.
+
+O texto de orientação e os sinais permanecem disponíveis sem JavaScript. Com JavaScript, cada seleção atualiza a lista de sinais e uma mensagem de estado sem mover o foco. Limpar seleção retorna o foco à primeira opção, sem afirmar resolução. Ao recarregar ou retornar pelo histórico, a seleção é limpa.
+
+Para conferir, selecionar cada uma das dez opções, combinar opções, limpar, navegar com teclado e recarregar. A orientação deve permanecer visível mesmo sem seleção. Esta etapa não substitui a rodada formal de testes pendente.

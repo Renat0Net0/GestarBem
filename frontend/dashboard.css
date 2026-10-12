@@ -7,3 +7,13 @@
 
 .dashboard-layout{grid-template-columns:minmax(0,1fr)}.dashboard-layout.has-reminders{grid-template-columns:minmax(0,1fr) 300px}
 @media(max-width:1000px){.dashboard-layout.has-reminders{grid-template-columns:minmax(0,1fr)}}
+
+.dashboard-shell .attention-section{border:1px solid #bda5cd;scroll-margin-top:16px}
+.attention-section fieldset{min-width:0;border:1px solid var(--border);border-radius:12px;padding:14px;margin:16px 0}
+.attention-section legend{font-weight:700;padding:0 6px}
+.attention-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px}
+.dashboard-shell .attention-choice{display:flex;align-items:center;gap:12px;min-height:48px;padding:12px;margin:0;background:#f2ebf8;border-radius:10px;font-weight:400;cursor:pointer}
+.auth-shell .attention-choice input{width:20px;min-height:20px;height:20px;padding:0;margin:0;flex:0 0 20px;accent-color:#74325c}
+.attention-choice span{min-width:0;overflow-wrap:anywhere}
+.attention-result{padding:18px;border:2px solid #74325c;border-radius:12px;background:#fcebf2;margin:16px 0}
+.attention-result h3{margin:0 0 10px;color:#74325c}
