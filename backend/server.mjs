@@ -5,6 +5,7 @@ import pg from 'pg';
 import {randomUUID,randomBytes} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {hashPassword,verifyPassword,registrationErrors,tokenHash} from './auth.mjs';
+import {registerActivity} from './activity.mjs';
 import {registerReminders} from './reminders.mjs';
 import {registerRecords} from './records.mjs';
 import {registerAgenda} from './agenda.mjs';
@@ -39,6 +40,7 @@ app.post('/api/profile',requireUser,async(req,res)=>{const errors=profileErrors(
 registerAgenda(app,pool,requireUser);
 registerRecords(app,pool,requireUser);
 registerReminders(app,pool,requireUser);
+registerActivity(app,pool,requireUser);
 // Entrada autenticada; index.html conserva a demonstração independente.
 app.get('/',(_req,res)=>res.redirect('/login.html'));
 app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url))));

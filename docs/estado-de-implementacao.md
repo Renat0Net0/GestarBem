@@ -31,7 +31,7 @@ Tabelas utilizadas: users, sessions, gestational_profiles, gestational_events e 
 | Autenticação e controle de acesso | Sessões, expiração, rotas por proprietária | Testes HTTP/PostgreSQL completos e revisão de falhas |
 | Proteção de senhas | Hash scrypt com salt | Revisão de configuração e operação |
 | Proteção da comunicação | Configuração de produção exige origem HTTPS e cookie Secure | Implantar e validar TLS no ambiente de hospedagem; localhost atual utiliza HTTP |
-| Rastreabilidade | GitHub registra alterações de código | Auditoria persistente das operações da usuária ainda não implementada; created_at/updated_at não substituem histórico de auditoria |
+| Rastreabilidade | GitHub registra alterações de código | Histórico transacional de perfil/agenda/registros implementado na migração 007; validação PostgreSQL e política de retenção pendentes |
 | Confiabilidade | Tratamento de erros, tentativas novamente e 19 testes automatizados existentes | Integração real, backup e teste de restauração |
 | Acessibilidade e utilização | HTML semântico, rótulos, foco, estados, tabela equivalente aos gráficos | Avaliação final de teclado, leitores de tela, contraste e zoom; não declarar conformidade completa |
 | Privacidade | Separação por conta e seleções temporárias locais | Definir retenção, exclusão, transparência, finalidade e procedimentos com a orientação do projeto |
@@ -40,7 +40,7 @@ Tabelas utilizadas: users, sessions, gestational_profiles, gestational_events e 
 
 ## Próximas entregas
 
-1. Implementar rastreabilidade das operações relevantes, com metadados mínimos e sem guardar senhas, tokens ou o conteúdo de saúde nos logs.
+1. Aplicar a migração 007 e validar a rastreabilidade de perfil, agenda e registros; a auditoria usa metadados mínimos e não copia o conteúdo de saúde.
 2. Definir as informações de privacidade e os procedimentos de gestão de dados para o protótipo, com a orientadora.
 3. Preparar backup, restauração e configuração de hospedagem quando houver decisão de implantação.
 4. Ao final do desenvolvimento, executar os 30 cenários, registrar evidências, calcular a taxa de aprovação e realizar avaliação de usabilidade com dez participantes.
