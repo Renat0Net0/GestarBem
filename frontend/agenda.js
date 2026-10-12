@@ -21,7 +21,7 @@ for(const id of ['filter-type','filter-status','filter-from','filter-to'])el(id)
 el('clear-filters').onclick=()=>{clearTimeout(filterTimer);for(const id of ['filter-search',...['filter-type','filter-status','filter-from','filter-to']])el(id).value='';resetResults();el('filter-search').focus();};
 function monthShape(month){const [year,number]=month.split('-').map(Number);return {offset:new Date(Date.UTC(year,number-1,1)).getUTCDay(),days:new Date(Date.UTC(year,number,0)).getUTCDate()};}
 function calendarRender(items){
- el('calendar-section').hidden=!calendarView;el('view-calendar').setAttribute('aria-pressed',String(calendarView));el('view-list').setAttribute('aria-pressed',String(!calendarView));
+ el('calendar-toolbar').hidden=!calendarView;el('calendar-month-select').value=calendarMonth.slice(5,7);el('calendar-year-select').value=calendarMonth.slice(0,4);el('calendar-section').hidden=!calendarView;el('view-calendar').setAttribute('aria-pressed',String(calendarView));el('view-list').setAttribute('aria-pressed',String(!calendarView));
  if(!calendarView)return;
  const [year,month]=calendarMonth.split('-').map(Number);
  const title=new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(Date.UTC(year,month-1,1)));
@@ -44,6 +44,7 @@ function calendarRender(items){
 }
 for(const [id,show]of [['view-calendar',true],['view-list',false]])el(id).onclick=()=>{if(busy)return;calendarView=show;selectedDay='';page=1;render();el(id).focus();};
 function moveMonth(step){if(busy)return;const [year,month]=calendarMonth.split('-').map(Number);const next=new Date(Date.UTC(year,month-1+step,1));if(next.getUTCFullYear()<1900||next.getUTCFullYear()>2100)return;calendarMonth=next.toISOString().slice(0,7);selectedDay='';page=1;render();}
+for(const id of ['calendar-month-select','calendar-year-select'])el(id).addEventListener('change',()=>{if(busy)return;calendarMonth=el('calendar-year-select').value+'-'+el('calendar-month-select').value;selectedDay='';page=1;render();});
 el('calendar-previous').onclick=()=>moveMonth(-1);el('calendar-next').onclick=()=>moveMonth(1);
 el('calendar-today').onclick=()=>{if(busy)return;calendarMonth=today().slice(0,7);selectedDay='';page=1;render();};
 el('calendar-clear-day').onclick=()=>{if(busy)return;selectedDay='';page=1;render();el('list-title').focus();};
