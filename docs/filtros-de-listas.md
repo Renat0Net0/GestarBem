@@ -25,3 +25,9 @@ Substituir frontend/agenda.html, agenda.js, records.html, records.js e agenda.cs
 Agenda e registros oferecem Data inicial e Data final, combinadas com os filtros existentes. As datas dos limites são incluídas. Um campo vazio remove apenas aquele limite. Período invertido ou data inválida apresenta erro e solicita correção, sem ser confundido com ausência de resultados. Limpar filtros remove também as datas. Não há mudança de banco ou API.
 
 Atualizar os quatro arquivos: frontend/agenda.html, agenda.js, records.html e records.js. Não há alteração adicional de CSS nesta etapa. Conferir limites iguais, cada limite isolado, combinação com tipo/texto, período invertido e limpeza. Sintaxe, estrutura e lógica verificadas; teste manual de navegador pendente.
+
+## Paginação
+
+Cada página mostra no máximo dez cards. Os controles Página anterior e Próxima página aparecem apenas se houver mais de dez resultados. A contagem informa intervalo exibido, total filtrado e total da conta. Alterar ou limpar filtros retorna à primeira página. Excluir itens ajusta a última página disponível. Ao mudar de página, o foco vai para o título da lista. A paginação atua nos dados já carregados; não reduz o volume recebido da API.
+
+Atualizar frontend/agenda.html, agenda.js, records.html e records.js. Conferir 0, 1, 10, 11 e 21 resultados, combinações de filtros e exclusão do último item da última página. Sintaxe e limites verificados em execução simulada; navegador e leitor de tela pendentes.
