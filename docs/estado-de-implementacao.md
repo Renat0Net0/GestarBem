@@ -15,7 +15,7 @@ Atualizado em 12/10/2026. Este documento registra implementação, relatos explo
 | Sinais de atenção | Dez seleções explícitas com orientação local e referências | Revisão clínica e testes; não são dez inferências automáticas sobre o histórico |
 | Resumo | Perfil, agenda e registros para imprimir ou salvar PDF pelo navegador | Impressão multipágina, falhas e acessibilidade do resultado |
 | Gráficos | Peso e pressão, até 30 medições recentes, tabela equivalente | Layout, leitores de tela e formatos antigos |
-| IA | Espaço reservado, sem integração ou envio de dados | Mantida para etapa posterior por decisão do projeto |
+| IA | Assistente pessoal via OpenAI, contexto limitado da conta, base OMS inicial, consentimento e quota persistente (migração 008); desativado até configurar ambiente | Integração real, migração 008, avaliação das respostas e ampliação/revisão das fontes |
 
 Os relatos do usuário confirmam diversos fluxos locais. Eles não substituem a execução documentada dos 30 cenários nem a avaliação com dez participantes.
 
@@ -33,7 +33,7 @@ Tabelas utilizadas: users, sessions, gestational_profiles, gestational_events e 
 | Proteção de senhas | Hash scrypt com salt | Revisão de configuração e operação |
 | Proteção da comunicação | Configuração de produção exige origem HTTPS e cookie Secure | Implantar e validar TLS no ambiente de hospedagem; localhost atual utiliza HTTP |
 | Rastreabilidade | GitHub registra alterações de código | Histórico transacional de perfil/agenda/registros implementado na migração 007; validação PostgreSQL e política de retenção pendentes |
-| Confiabilidade | Tratamento de erros, tentativas novamente e 26 testes automatizados aprovados em 12/10/2026 (banco simulado) | Integração real, backup e teste de restauração |
+| Confiabilidade | Tratamento de erros, tentativas novamente e 34 testes automatizados aprovados em 13/10/2026 (banco/provedor simulados) | Integração real, backup e teste de restauração |
 | Acessibilidade e utilização | HTML semântico, rótulos, foco, estados, tabela equivalente aos gráficos | Avaliação final de teclado, leitores de tela, contraste e zoom; não declarar conformidade completa |
 | Privacidade | Separação por conta e seleções temporárias locais | Definir retenção, exclusão, transparência, finalidade e procedimentos com a orientação do projeto |
 | Desempenho | Pool de conexão, limites de requisição, paginação visual | Medir tempos; paginação visual não limita os dados recebidos da API |
@@ -46,8 +46,8 @@ Tabelas utilizadas: users, sessions, gestational_profiles, gestational_events e 
 3. Preparar backup, restauração e configuração de hospedagem quando houver decisão de implantação.
 4. Ao final do desenvolvimento, executar os 30 cenários, registrar evidências, calcular a taxa de aprovação e realizar avaliação de usabilidade com dez participantes conforme testes-usabilidade.md; roteiro preparado, coleta ainda não realizada.
 
-Recuperação de senha, envio de e-mail, notificações externas e IA não estão implementados. Não apresentar esses itens como recursos disponíveis. A inclusão no escopo deve ser tratada como decisão de produto, não como requisito já cumprido.
+Recuperação de senha, envio de e-mail e notificações externas não estão implementados. A IA foi incorporada como demonstração experimental e depende de configuração, créditos da API e migração 008. Não apresentar esses itens como recursos disponíveis. A inclusão no escopo deve ser tratada como decisão de produto, não como requisito já cumprido.
 
 ## Documentação associada
 
-Consulte testes-usabilidade.md, troca-de-senha.md, testes-funcionais.md, regras-de-atencao.md, lembretes-internos.md, calendario-da-agenda.md, filtros-de-listas.md, resumo-para-impressao.md e graficos-de-medicoes.md. A documentação de uma funcionalidade não é evidência de execução de todos os seus testes.
+Consulte assistente-ia.md, testes-usabilidade.md, troca-de-senha.md, testes-funcionais.md, regras-de-atencao.md, lembretes-internos.md, calendario-da-agenda.md, filtros-de-listas.md, resumo-para-impressao.md e graficos-de-medicoes.md. A documentação de uma funcionalidade não é evidência de execução de todos os seus testes.
