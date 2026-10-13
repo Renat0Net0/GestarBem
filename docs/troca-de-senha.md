@@ -19,3 +19,7 @@ Fonte: confirmação do usuário nesta conversa. Navegador, versão exata do com
 Após erros do servidor, o foco vai para o primeiro campo inválido na ordem visual; em falhas gerais, vai para a mensagem de erro, com tabindex=-1. Se a verificação da sessão falhar, o botão Tentar novamente recebe foco. Respostas sem JSON válido são tratadas como alteração não confirmada, orientando a conferir o login antes de repetir. Ao limpar os campos, a visibilidade das senhas volta ao estado oculto.
 
 Verificação: sintaxe JavaScript aprovada e quatro cenários com DOM/respostas simulados (falha geral, erros de campos em ordem diferente, resposta ilegível e falha da verificação de sessão). Também verificados desbloqueio dos controles e limpeza/ocultação de senha ao sair. Não adicionados ao npm test: verificação exploratória separada. Teclado e leitor de tela em navegador real ainda precisam de validação.
+
+## Confirmação exploratória de teclado — 12/10/2026
+
+Renato confirmou funcionamento do foco em Senha atual após erro e, posteriormente, do roteiro de Tab/Shift+Tab, foco visível, acionamento de Mostrar nova senha pelo teclado e foco em Confirmar nova senha para senhas diferentes. Confirmação por relato; versão exata e evidências individuais não registradas. Avaliação com leitor de tela ainda pendente.
