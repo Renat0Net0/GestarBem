@@ -74,3 +74,21 @@ Na rodada local, testar também: trocar a senha com uma conta fictícia, confirm
 ## Revisão de foco na agenda e nos registros — 12/10/2026
 
 Erros de campos recebidos da API direcionam o foco para o primeiro campo inválido na ordem do formulário, após desbloquear os controles. Falhas gerais de salvamento direcionam o foco para a mensagem de erro dentro do diálogo. Falha ao carregar a lista direciona o foco ao botão de nova tentativa. Sintaxe e quatro cenários de formulário com DOM/API simulados passaram. Verificação separada da suíte de 26 testes; navegador e leitor de tela ainda pendentes para estas alterações.
+
+## Confirmação exploratória dos diálogos — 12/10/2026
+
+Renato confirmou o roteiro de agenda e registros: abertura pelo teclado, foco em campo obrigatório vazio ao tentar salvar e fechamento por Escape com retorno ao acionador. Relato do usuário, sem evidências individuais ou commit informado. Não equivale à avaliação completa de acessibilidade.
+
+## Integração do histórico com PostgreSQL
+
+Na pasta backend, após instalar as dependências e configurar o .env existente, executar:
+
+```bash
+npm run test:activity:db
+```
+
+O comando usa DATABASE_URL e a função real registerActivity com o cliente PostgreSQL. Cria quatro tabelas temporárias na sessão, configura search_path local para pg_temp e pg_catalog e executa rollback no encerramento. Não altera as tabelas persistentes nem aplica migrações. São usadas somente fixtures fictícias.
+
+Cobre três cenários: separação de atividades por conta apesar de identidade enviada no corpo/consulta; ausência de identificação e data para itens excluídos ou pertencentes a outra conta, preservando a identificação de itens próprios; limite de 50 atividades com desempate por ID e preservação da outra conta.
+
+A sintaxe do arquivo foi verificada. A execução PostgreSQL está pendente: não havia servidor ou cliente PostgreSQL neste ambiente. O comando é separado de npm test; a suíte padrão continua com 26 testes. Esta integração não cobre autenticação HTTP, middleware real, triggers da migração 007 ou rastreabilidade transacional das operações.
