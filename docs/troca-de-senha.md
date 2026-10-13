@@ -13,3 +13,9 @@ Verificação final: senha atual errada, confirmação diferente, senha curta/lo
 Renato confirmou “tudo certo” após o roteiro de validação local: senha atual incorreta recusada; nova senha com cinco caracteres recusada; senha com seis caracteres aceita; senha antiga recusada e nova aceita no login; perfil, compromissos e registros preservados; segunda sessão solicitando login após a troca.
 
 Fonte: confirmação do usuário nesta conversa. Navegador, versão exata do commit e evidências individuais não foram informados. Esta confirmação registra os passos do roteiro como relato exploratório, sem certificar a execução formal dos 30 cenários ou os casos adicionais de senha longa, confirmação diferente, senha repetida, falha transacional real e isolamento entre contas. Os testes automatizados com banco simulado permanecem evidência separada.
+
+## Foco e falhas de resposta — 12/10/2026
+
+Após erros do servidor, o foco vai para o primeiro campo inválido na ordem visual; em falhas gerais, vai para a mensagem de erro, com tabindex=-1. Se a verificação da sessão falhar, o botão Tentar novamente recebe foco. Respostas sem JSON válido são tratadas como alteração não confirmada, orientando a conferir o login antes de repetir. Ao limpar os campos, a visibilidade das senhas volta ao estado oculto.
+
+Verificação: sintaxe JavaScript aprovada e quatro cenários com DOM/respostas simulados (falha geral, erros de campos em ordem diferente, resposta ilegível e falha da verificação de sessão). Também verificados desbloqueio dos controles e limpeza/ocultação de senha ao sair. Não adicionados ao npm test: verificação exploratória separada. Teclado e leitor de tela em navegador real ainda precisam de validação.
