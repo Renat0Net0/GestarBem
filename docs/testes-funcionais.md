@@ -91,4 +91,12 @@ O comando usa DATABASE_URL e a função real registerActivity com o cliente Post
 
 Cobre três cenários: separação de atividades por conta apesar de identidade enviada no corpo/consulta; ausência de identificação e data para itens excluídos ou pertencentes a outra conta, preservando a identificação de itens próprios; limite de 50 atividades com desempate por ID e preservação da outra conta.
 
-A sintaxe do arquivo foi verificada. A execução PostgreSQL está pendente: não havia servidor ou cliente PostgreSQL neste ambiente. O comando é separado de npm test; a suíte padrão continua com 26 testes. Esta integração não cobre autenticação HTTP, middleware real, triggers da migração 007 ou rastreabilidade transacional das operações.
+A sintaxe do arquivo foi verificada. A execução foi confirmada no PostgreSQL local do usuário em 12/10/2026, conforme evidência abaixo; neste ambiente foi verificada somente a sintaxe. O comando é separado de npm test; a suíte padrão continua com 26 testes. Esta integração não cobre autenticação HTTP, middleware real, triggers da migração 007 ou rastreabilidade transacional das operações.
+
+## Resultado de integração recebido — 12/10/2026
+
+Responsável pela execução: Renato. Ambiente informado no terminal: Windows/Git Bash, pasta GestarBem-Git/backend, branch feat/prototipo-acessivel. Versão após pull: 6fe91a58bdef1185a6b7cb0f75e33c1ba709355c. Comando: npm run test:activity:db. Versões de Node/PostgreSQL não informadas.
+
+Saída enviada pelo usuário: 4 testes, 4 aprovados, 0 falhas, 0 ignorados; duração total 334,1269 ms. A contagem inclui o teste principal e seus três subtestes. Passaram: separação de contas e rejeição de identidade enviada; ausência de descrição/data para itens de outra conta ou excluídos; limite de 50 com desempate por ID.
+
+Evidência: transcrição do terminal fornecida pelo usuário. Aprovação restrita à consulta real de registerActivity nas fixtures temporárias. Autenticação HTTP, triggers e rollback de operações de domínio ainda não foram avaliados por esse teste; os 30 cenários funcionais permanecem em rodada separada.
