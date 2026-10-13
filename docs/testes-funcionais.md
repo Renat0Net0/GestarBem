@@ -63,4 +63,10 @@ A avaliação de usabilidade com dez participantes deve ter protocolo próprio, 
 
 ## Verificação automatizada
 
-Executar `npm test` na pasta backend. A suíte atual contém 19 testes de validação e verificações com dependências simuladas. Não representa teste completo do navegador, integração real com PostgreSQL nem aprovação dos 30 cenários acima.
+Executar `npm test` na pasta backend. A suíte atual contém 26 testes de validação e verificações com dependências simuladas, incluindo seis cenários de troca de senha. Não representa teste completo do navegador, integração real com PostgreSQL nem aprovação dos 30 cenários acima.
+
+## Troca de senha — validação complementar
+
+Em 12/10/2026, os 26 testes passaram com Node.js 24.19.0. Os seis novos cenários verificam limites de senha e confirmação; senha atual incorreta; uso da identidade da sessão, hash da nova senha e remoção de sessões; rollback após falha simulada; conta removida; rejeição de campos antes do acesso ao banco. O cliente PostgreSQL é simulado: as verificações demonstram consultas e controle de transação, não execução real de rollback ou isolamento no banco.
+
+Na rodada local, testar também: trocar a senha com uma conta fictícia, confirmar recusa da senha antiga e aceitação da nova, confirmar encerramento de uma segunda sessão e preservar perfil, agenda e registros. Esses resultados permanecem não executados nesta rodada e complementam os 30 cenários, sem alterar o denominador da meta acadêmica.
