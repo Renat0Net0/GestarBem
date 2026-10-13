@@ -7,6 +7,7 @@ Atualizado em 12/10/2026. Este documento registra implementação, relatos explo
 | Módulo | Implementação atual | Pendência de validação |
 |---|---|---|
 | Cadastro e sessão | Cadastro, login, logout, senha com scrypt e sessão no PostgreSQL | Rodada formal de autenticação e isolamento |
+| Configurações da conta | Troca de senha de 6 a 128 caracteres, confirmação, senha atual e encerramento de sessões; seis testes automatizados | Validar login com nova senha e encerramento de outra sessão em PostgreSQL/navegador |
 | Perfil | DUM e observações por conta; estimativa gestacional | Revisar cálculo e textos com os cenários finais |
 | Agenda | CRUD, concluir/reabrir, datas futuras, filtros, paginação e calendário mensal | Teclado, telas estreitas, viradas de mês e isolamento |
 | Registros | CRUD por conta; tipo primeiro e unidades de peso/pressão | Valores inválidos, limites e isolamento |
@@ -32,7 +33,7 @@ Tabelas utilizadas: users, sessions, gestational_profiles, gestational_events e 
 | Proteção de senhas | Hash scrypt com salt | Revisão de configuração e operação |
 | Proteção da comunicação | Configuração de produção exige origem HTTPS e cookie Secure | Implantar e validar TLS no ambiente de hospedagem; localhost atual utiliza HTTP |
 | Rastreabilidade | GitHub registra alterações de código | Histórico transacional de perfil/agenda/registros implementado na migração 007; validação PostgreSQL e política de retenção pendentes |
-| Confiabilidade | Tratamento de erros, tentativas novamente e 19 testes automatizados existentes | Integração real, backup e teste de restauração |
+| Confiabilidade | Tratamento de erros, tentativas novamente e 26 testes automatizados aprovados em 12/10/2026 (banco simulado) | Integração real, backup e teste de restauração |
 | Acessibilidade e utilização | HTML semântico, rótulos, foco, estados, tabela equivalente aos gráficos | Avaliação final de teclado, leitores de tela, contraste e zoom; não declarar conformidade completa |
 | Privacidade | Separação por conta e seleções temporárias locais | Definir retenção, exclusão, transparência, finalidade e procedimentos com a orientação do projeto |
 | Desempenho | Pool de conexão, limites de requisição, paginação visual | Medir tempos; paginação visual não limita os dados recebidos da API |
