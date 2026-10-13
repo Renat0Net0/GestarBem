@@ -7,7 +7,7 @@ Atualizado em 12/10/2026. Este documento registra implementação, relatos explo
 | Módulo | Implementação atual | Pendência de validação |
 |---|---|---|
 | Cadastro e sessão | Cadastro, login, logout, senha com scrypt e sessão no PostgreSQL | Rodada formal de autenticação e isolamento |
-| Configurações da conta | Troca de senha de 6 a 128 caracteres, confirmação, senha atual e encerramento de sessões; seis testes automatizados | Validar login com nova senha e encerramento de outra sessão em PostgreSQL/navegador |
+| Configurações da conta | Troca de senha de 6 a 128 caracteres, confirmação, senha atual e encerramento de sessões; seis testes automatizados | Fluxos locais confirmados pelo usuário em 12/10/2026; rodada formal e casos adicionais pendentes (troca-de-senha.md) |
 | Perfil | DUM e observações por conta; estimativa gestacional | Revisar cálculo e textos com os cenários finais |
 | Agenda | CRUD, concluir/reabrir, datas futuras, filtros, paginação e calendário mensal | Teclado, telas estreitas, viradas de mês e isolamento |
 | Registros | CRUD por conta; tipo primeiro e unidades de peso/pressão | Valores inválidos, limites e isolamento |
@@ -44,10 +44,10 @@ Tabelas utilizadas: users, sessions, gestational_profiles, gestational_events e 
 1. Aplicar a migração 007 e validar a rastreabilidade de perfil, agenda e registros; a auditoria usa metadados mínimos e não copia o conteúdo de saúde.
 2. Definir as informações de privacidade e os procedimentos de gestão de dados para o protótipo, com a orientadora.
 3. Preparar backup, restauração e configuração de hospedagem quando houver decisão de implantação.
-4. Ao final do desenvolvimento, executar os 30 cenários, registrar evidências, calcular a taxa de aprovação e realizar avaliação de usabilidade com dez participantes.
+4. Ao final do desenvolvimento, executar os 30 cenários, registrar evidências, calcular a taxa de aprovação e realizar avaliação de usabilidade com dez participantes conforme testes-usabilidade.md; roteiro preparado, coleta ainda não realizada.
 
 Recuperação de senha, envio de e-mail, notificações externas e IA não estão implementados. Não apresentar esses itens como recursos disponíveis. A inclusão no escopo deve ser tratada como decisão de produto, não como requisito já cumprido.
 
 ## Documentação associada
 
-Consulte testes-funcionais.md, regras-de-atencao.md, lembretes-internos.md, calendario-da-agenda.md, filtros-de-listas.md, resumo-para-impressao.md e graficos-de-medicoes.md. A documentação de uma funcionalidade não é evidência de execução de todos os seus testes.
+Consulte testes-usabilidade.md, troca-de-senha.md, testes-funcionais.md, regras-de-atencao.md, lembretes-internos.md, calendario-da-agenda.md, filtros-de-listas.md, resumo-para-impressao.md e graficos-de-medicoes.md. A documentação de uma funcionalidade não é evidência de execução de todos os seus testes.
