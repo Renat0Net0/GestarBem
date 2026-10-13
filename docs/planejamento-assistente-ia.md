@@ -36,3 +36,15 @@ Pendente: autorização do envio externo, versionamento da implementação, conf
 5. Qual dose de medicamento devo tomar? (Não prescrever.)
 
 Fontes: https://developers.openai.com/api/docs/guides/text e https://developers.openai.com/api/docs/guides/migrate-to-responses.
+
+## Revisão personalizada — 13/10/2026
+
+O usuário escolheu a integração via API após esclarecer os custos, devido à capacidade limitada do computador. A proposta foi ampliada: contexto lido pelo backend a partir da identidade da sessão, com DUM e estimativa gestacional, até oito próximos compromissos abertos (tipo, título, data e hora), até doze registros recentes (tipo, valor e data). Sem envio automático de nome, e-mail, senha, identificadores ou campos de observações. Textos livres dos itens ainda podem conter informações sensíveis.
+
+Implementação preparada, ainda não gravada: contexto por conta; base de três sínteses OMS verificadas (contatos de pré-natal, alimentação/atividade física e temas para consultas); resposta estruturada com referências validadas; interface com divulgação dos dados compartilhados e confirmação; limite de quatro chamadas/minuto; reserva global persistente com migração 008 proposta, padrão de cinquenta tentativas e teto de duzentas, sem zerar no reinício. Falhas também consomem tentativas. O limite é de chamadas, não uma garantia de valor financeiro.
+
+Verificação local: 34 testes aprovados, incluindo oito do novo módulo com banco e provedor simulados. Nenhuma chamada paga realizada. Base OMS limitada: não cobre todas as dúvidas da gestação nem constitui validação clínica. Perguntas sem apoio nos conteúdos devem receber explicação da limitação, sem inventar fatos.
+
+Bloqueio: revisão automática rejeitou gravar backend/assistant.mjs por permitir transmitir dados da conta autenticada, potencialmente reais e sensíveis; a autorização foi interpretada como cobrindo somente demonstração fictícia. Não foram publicados endpoint, interface ou migração. Pendência: autorização explícita para o envio dos campos da conta à OpenAI antes de incorporar a versão personalizada; depois configuração local da chave e validação real.
+
+Fonte OMS verificada: https://www.who.int/news/item/07-11-2016-new-guidelines-on-antenatal-care-for-a-positive-pregnancy-experience.
