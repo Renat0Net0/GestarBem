@@ -70,3 +70,7 @@ Executar `npm test` na pasta backend. A suíte atual contém 26 testes de valida
 Em 12/10/2026, os 26 testes passaram com Node.js 24.19.0. Os seis novos cenários verificam limites de senha e confirmação; senha atual incorreta; uso da identidade da sessão, hash da nova senha e remoção de sessões; rollback após falha simulada; conta removida; rejeição de campos antes do acesso ao banco. O cliente PostgreSQL é simulado: as verificações demonstram consultas e controle de transação, não execução real de rollback ou isolamento no banco.
 
 Na rodada local, testar também: trocar a senha com uma conta fictícia, confirmar recusa da senha antiga e aceitação da nova, confirmar encerramento de uma segunda sessão e preservar perfil, agenda e registros. Esses resultados permanecem não executados nesta rodada e complementam os 30 cenários, sem alterar o denominador da meta acadêmica.
+
+## Revisão de foco na agenda e nos registros — 12/10/2026
+
+Erros de campos recebidos da API direcionam o foco para o primeiro campo inválido na ordem do formulário, após desbloquear os controles. Falhas gerais de salvamento direcionam o foco para a mensagem de erro dentro do diálogo. Falha ao carregar a lista direciona o foco ao botão de nova tentativa. Sintaxe e quatro cenários de formulário com DOM/API simulados passaram. Verificação separada da suíte de 26 testes; navegador e leitor de tela ainda pendentes para estas alterações.
