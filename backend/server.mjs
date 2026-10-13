@@ -6,6 +6,7 @@ import {randomUUID,randomBytes} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {hashPassword,verifyPassword,registrationErrors,tokenHash} from './auth.mjs';
 import {registerAccountSettings} from './account-settings.mjs';
+import {registerAssistant} from './assistant.mjs';
 import {registerActivity} from './activity.mjs';
 import {registerReminders} from './reminders.mjs';
 import {registerRecords} from './records.mjs';
@@ -42,6 +43,8 @@ registerAgenda(app,pool,requireUser);
 registerRecords(app,pool,requireUser);
 registerReminders(app,pool,requireUser);
 registerActivity(app,pool,requireUser);
+const aiLimiter=rateLimit({windowMs:60000,limit:4,keyGenerator:req=>req.user.id,standardHeaders:'draft-8',legacyHeaders:false,message:{message:'Aguarde: limite de quatro perguntas por minuto.'}});
+registerAssistant(app,pool,requireUser,aiLimiter);
 registerAccountSettings(app,pool,requireUser,authLimiter,cookieName);
 // Entrada autenticada; index.html conserva a demonstração independente.
 app.get('/',(_req,res)=>res.redirect('/login.html'));
