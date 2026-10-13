@@ -6,4 +6,10 @@ settings.html é acessível pelo painel. Mostrar nova senha afeta a nova senha e
 
 Atualizar backend/server.mjs, acrescentar account-settings.mjs; atualizar frontend/account.html e acrescentar settings.html e settings.js. Reiniciar backend. Sem migração e sem alteração no .env.
 
-Verificação final: senha atual errada, confirmação diferente, senha curta/longa, senha igual à atual, troca válida, antiga recusada/nova aceita, invalidação de outra sessão, falha transacional e isolamento entre contas. Validação JavaScript e fluxos com cliente de banco simulado conferidos; PostgreSQL/navegador reais pendentes.
+Verificação final: senha atual errada, confirmação diferente, senha curta/longa, senha igual à atual, troca válida, antiga recusada/nova aceita, invalidação de outra sessão, falha transacional e isolamento entre contas. Validação JavaScript e fluxos com cliente de banco simulado conferidos; A rodada completa com PostgreSQL/navegador continua pendente; veja o relato exploratório abaixo.
+
+## Relato exploratório local — 12/10/2026
+
+Renato confirmou “tudo certo” após o roteiro de validação local: senha atual incorreta recusada; nova senha com cinco caracteres recusada; senha com seis caracteres aceita; senha antiga recusada e nova aceita no login; perfil, compromissos e registros preservados; segunda sessão solicitando login após a troca.
+
+Fonte: confirmação do usuário nesta conversa. Navegador, versão exata do commit e evidências individuais não foram informados. Esta confirmação registra os passos do roteiro como relato exploratório, sem certificar a execução formal dos 30 cenários ou os casos adicionais de senha longa, confirmação diferente, senha repetida, falha transacional real e isolamento entre contas. Os testes automatizados com banco simulado permanecem evidência separada.
