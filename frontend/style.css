@@ -4,3 +4,18 @@
 .hero{background:linear-gradient(115deg,#f1e7f8 0%,#f8eaf1 100%)}.mark{background:linear-gradient(145deg,#70438a,#8a3f6e)}.side-note{background:linear-gradient(145deg,#f2ebf8,#fcebf2)}.note{border:1px solid #efd5e2}.brand{letter-spacing:-.7px}.card,.stat{box-shadow:0 3px 14px #5c347006}.gestation{box-shadow:0 6px 20px #70438a08}
 
 .ai-space{border-color:#cbb6dd;background:linear-gradient(145deg,#fff,#fcf8ff)}.ai-topics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0}.ai-topics>div{background:var(--light);padding:18px;border-radius:12px}.ai-topics h3{font-size:16px}.ai-topics p{font-size:14px;margin-bottom:0}.ai-placeholder{background:white;border:1px dashed #9986a5;border-radius:12px;padding:22px}.ai-placeholder p{font-size:14px}button:disabled,textarea:disabled{cursor:not-allowed;background:#f0ebf3;color:#685b73;border-color:#9986a5;opacity:1}.ai-preview{background:#f8f1fc}@media(max-width:1000px){.ai-topics{grid-template-columns:1fr}}
+
+/* Foco, ampliação e alvos: critérios WCAG 2.2 AA. */
+html{scroll-padding-block:16px}
+body{overflow-wrap:anywhere}
+main,.workspace,.card,.dashboard-grid>*{min-width:0}
+.actions{flex-wrap:wrap}
+button,.button{max-width:100%;white-space:normal}
+:where(input,select,textarea){min-width:0;max-width:100%}
+:where(a,button,input,select,textarea,summary,[tabindex]){scroll-margin-block:20px}
+:focus-visible,[tabindex="-1"]:focus{outline:3px solid #74325c;outline-offset:3px}
+main:focus-visible{outline:3px solid #74325c;outline-offset:-3px}
+a:not(.button):not(.brand){text-underline-offset:.18em}
+[aria-invalid="true"]{border:2px solid #74325c}
+button[aria-pressed="true"]{box-shadow:inset 0 0 0 2px currentColor;text-decoration:underline;text-underline-offset:.2em}
+@media(forced-colors:active){:focus-visible,[tabindex="-1"]:focus{outline:3px solid Highlight}button[aria-pressed="true"]{border:3px solid Highlight}[aria-invalid="true"]{border:2px dashed CanvasText}}

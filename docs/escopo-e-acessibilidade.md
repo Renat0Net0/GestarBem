@@ -1,77 +1,104 @@
-# GestarBem
+# GestarBem — Nielsen e WCAG 2.2 AA
 
-Primeira etapa do site baseada no arquivo Pre_Projeto_GestarBem (3).docx, recebido em 5 de outubro de 2026.
+Revisão de 15/10/2026. A meta permanece WCAG 2.2 nível AA, abrangendo critérios A e AA aplicáveis, páginas completas e fluxos completos. Esta documentação não constitui declaração de conformidade. Remover rótulos de demonstração não muda o estado da avaliação.
 
-## Proposta e decisões
+## Escopo atual
 
-Plataforma web para uso direto pela gestante. Reúne perfil, acompanhamento, agenda, lembretes, regras de atenção e sugestões gerais por IA. Não contempla perfil profissional, clínicas ou familiares. IoT é opcional e posterior.
+Entrada, login/cadastro, painel/perfil/assistente, agenda, registros/gráficos, histórico, configurações, resumo e ajuda. Frontend HTML/CSS/JavaScript servido pelo backend Express com PostgreSQL. A tela antiga em app.js não é carregada pela entrada atual e não integra esta revisão; não reativá-la sem avaliação.
 
-O documento prevê HTML/CSS/JavaScript, Node.js/Express e PostgreSQL. Esta primeira entrega implementa a interface com HTML/CSS/JavaScript sem dependências, como protótipo de interação. Nenhuma informação é persistida ou enviada a uma API. Não implementar falso login ou falsa IA. Dados fictícios explícitos e memória da página são adequados a esta fase, mas insuficientes para uso real.
+## Correções desta revisão
 
-## Pendências do pré-projeto
-
-- Cronograma sem datas.
-- Objetivos específicos listam três itens e não cobrem IA, regras, segurança e testes previstos nos resultados.
-- Referência Flutter sem uso previsto na arquitetura web.
-- Referências com nomes de páginas em vez de URLs verificáveis.
-- Regras de atenção ainda sem catálogo de critérios, fontes, versões e casos de teste.
+- Navegação da conta na mesma ordem nas seis telas autenticadas, incluindo ajuda e configurações; página atual identificada onde há item correspondente.
+- Controles Calendário e Lista com texto visível além dos ícones; orientação de rolagem e alternativa em lista.
+- Mensagem de erro da IA associada ao campo de pergunta e confirmação; aria-invalid, foco no campo e limpeza do estado ao limpar.
+- Nova tentativa de carregar a IA sem recarregar toda a página; retorno de foco ao estado após nova tentativa.
+- Alvo da confirmação da IA ampliado pelo rótulo, foco reforçado e estados selecionados com sublinhado/contorno, além da cor.
+- Quebra de ações e colunas que podem encolher em telas estreitas; foco interno nas células do calendário e suporte a cores forçadas.
+- Preservadas confirmação de exclusão, mensagens de andamento, cancelar/Escape, retorno ao acionador e conteúdo após erro.
 
 ## Heurísticas de Nielsen
 
-| Heurística | Decisão da primeira versão | Validação pendente |
-| --- | --- | --- |
-| Visibilidade do estado | Agenda informa Agendado/Concluído; confirmação de salvamento; demonstração identificada | Leitura das mensagens com NVDA |
-| Correspondência com o mundo real | Termos consulta, vacina, data, horário; datas brasileiras | Testes com gestantes |
-| Controle e liberdade | Cancelar, fechar por Escape, editar, reabrir e desfazer exclusão | Teste de recuperação de erros |
-| Consistência e padrões | Navegação e botões consistentes, mesma estrutura de formulário | Revisão de todas as telas |
-| Prevenção de erros | Obrigatoriedade, limites, datas e escape de conteúdo inserido | Testes de campos e datas |
-| Reconhecimento em vez de memorização | Rótulos permanentes, registros visíveis e navegação nomeada | Usabilidade |
-| Flexibilidade e eficiência | Atalhos no painel, operação por teclado e edição | Teclado e dispositivo móvel |
-| Estética e minimalismo | Painel com agenda, histórico e próximo passo | Usabilidade |
-| Reconhecer e recuperar erros | Campo inválido recebe foco e mensagem; conteúdo preservado | Leitor de tela |
-| Ajuda e documentação | Ajuda contextual e página dedicada | Compreensão com usuários |
+| Heurística | Evidência de implementação | Avaliação restante |
+|---|---|---|
+| Visibilidade do estado | Carregamento, salvamento, conclusão, paginação e retorno da IA em texto | Anúncio efetivo com leitor de tela |
+| Correspondência com o mundo real | Vocabulário do acompanhamento, datas brasileiras, unidades nos registros | Compreensão com participantes |
+| Controle e liberdade | Cancelar/Escape, editar/reabrir, confirmação antes de excluir, limpar IA | Fluxos completos com teclado; exclusão não tem desfazer após confirmação |
+| Consistência e padrões | Navegação da conta na mesma ordem e ajuda na mesma posição | Conferência visual entre telas |
+| Prevenção de erros | Validação, limites de datas, confirmação de senha e exclusão | Rodada formal com PostgreSQL |
+| Reconhecimento | Rótulos permanentes, filtros nomeados, botões Calendário/Lista e contexto da IA | Observação de tarefas |
+| Eficiência | Filtros, calendário/lista, paginação e atalhos do painel | Tempo e dificuldades nas tarefas |
+| Minimalismo | Conteúdo organizado por seção, filtros recolhíveis, detalhes sobre IA | Avaliação com usuários |
+| Recuperação de erros | Erros em texto, campo inválido e foco; nova tentativa da IA | Falhas reais de rede e leitor de tela |
+| Ajuda | Ajuda e privacidade consistente, instruções em formulários e unidades | Clareza do conteúdo |
 
-## Meta WCAG 2.2 AA
+## Matriz WCAG — acompanhamento, sem certificação
 
-Meta de projeto, não declaração de conformidade. Os quatro princípios são perceptível, operável, compreensível e robusto.
+“Código” significa evidência de implementação ou inspeção estática; não aprovação do critério. A avaliação deve considerar todos os critérios aplicáveis na versão final.
 
-| Princípio | Critérios relevantes | Implementação / verificação |
-| --- | --- | --- |
-| Perceptível | 1.3.1, 1.4.1, 1.4.3, 1.4.4, 1.4.10, 1.4.11 | HTML semântico, rótulos, estado em texto, paleta com contraste calculado; testar zoom 200%, reflow a 320px e 400% |
-| Operável | 2.1.1, 2.1.2, 2.4.1, 2.4.2, 2.4.3, 2.4.6, 2.4.7, 2.4.11, 2.5.3, 2.5.8 | Link para pular navegação, foco visível, título por tela, dialog nativo com Escape e retorno de foco; botões com altura mínima 44px; validar ordem, largura e obstrução do foco |
-| Compreensível | 3.1.1, 3.2.1, 3.2.2, 3.2.3, 3.3.1, 3.3.2, 3.3.3 | pt-BR, rótulos claros, navegação consistente, erros anunciados e campos preservados |
-| Robusto | 4.1.2, 4.1.3 | Controles nativos, aria-current, dialog nomeado, mensagens role=status e role=alert; validar NVDA/Firefox e VoiceOver/Safari |
+| Critérios | Evidência ou situação | Pendência |
+|---|---|---|
+| 1.1.1 | SVG de gráfico nomeado e descrito; tabela equivalente; ícones decorativos ocultos | Leitura de gráfico/tabela no leitor de tela |
+| 1.2.1–1.2.5 | Não há áudio/vídeo nas páginas revisadas | Reavaliar se mídia for incorporada |
+| 1.3.1–1.3.3 | Estrutura, rótulos, regiões e instruções textuais | Ordem e relações no navegador/leitor |
+| 1.3.4 | Layout sem bloqueio de orientação | Retrato e paisagem em dispositivo |
+| 1.3.5 | Autocomplete nos campos de conta e senha | Conferir preenchimento automático real |
+| 1.4.1–1.4.3 | Estados textuais, linhas diferenciadas e contraste da paleta calculado; sem áudio automático | Medir demais combinações, gradientes e estados |
+| 1.4.4–1.4.5 | Texto HTML e unidades em texto; gráfico possui tabela | Ampliação de 200% |
+| 1.4.10 | Ações quebram linha; colunas minmax(0,1fr); calendário/tabela em região de rolagem | Reflow a 320 CSS px e zoom de 400%, sem perda; verificar exceção de tabela |
+| 1.4.11 | Bordas e foco com cores definidas | Contraste dos componentes em todos os estados |
+| 1.4.12–1.4.13 | Alturas de texto flexíveis; sem conteúdo customizado dependente de hover | Espaçamento de texto e revisão de hover/foco |
+| 2.1.1–2.1.2, 2.1.4 | Controles nativos e diálogos com Escape; sem atalhos de uma letra | Percurso completo, calendário e ausência de armadilhas |
+| 2.2.1–2.2.2 | Sessão de oito horas; sem conteúdo animado obrigatório | Avaliar expiração de sessão e preservação/recuperação de trabalho; não dar este item como atendido |
+| 2.3.1 | Sem efeitos intermitentes no código revisado | Verificação visual |
+| 2.4.1–2.4.7 | Salto para main, títulos, h1, navegação, rótulos e foco | Ordem, destinos, nomes e foco visível em todos os fluxos |
+| 2.4.11 | Margem de rolagem/foco e tratamento em região do calendário | Confirmar que o foco não fica totalmente oculto por conteúdo |
+| 2.5.1–2.5.4, 2.5.7 | Sem gestos complexos ou arraste obrigatório; botões nativos | Verificar cancelamento de ponteiro e comandos de voz |
+| 2.5.8 | Controles principais de 44px, rótulos clicáveis e confirmação da IA ampliada | Medir geometria/espaçamento dos demais alvos no navegador; 44px é escolha do projeto, não o mínimo AA de 24px |
+| 3.1.1–3.1.2 | pt-BR e conteúdo principal em português | Trechos gerados e mudanças de idioma |
+| 3.2.1–3.2.4, 3.2.6 | Ações explícitas; ajuda e navegação consistentes | Testar previsibilidade e consistência entre estados |
+| 3.3.1–3.3.4 | Erros associados, validações, confirmação de exclusão e edição | Processos completos e mensagens do servidor |
+| 3.3.7–3.3.8 | Colagem/gerenciadores permitidos, autocomplete e mostrar senha | Autenticação real, entradas redundantes e preenchimento automático |
+| 4.1.2–4.1.3 | Nome/papel/estado, referências ARIA e mensagens de estado | NVDA e browser: anúncios sem depender de mudança de foco |
 
-Não basta um scanner automático ou contraste para declarar WCAG AA. Avaliar todos os critérios aplicáveis e processos completos, inclusive cadastro, autenticação e recuperação quando existirem. Autenticação futura deve permitir gerenciadores, colagem de senha e alternativas acessíveis (3.3.8); evitar entrada redundante (3.3.7).
+## Contraste calculado
 
-## Próximas etapas técnicas
+Fórmula de luminância relativa sRGB. Resultados arredondados; não substituem inspeção dos fundos reais, opacidade e estados.
 
-1. Ajustar objetivos e cronograma; confirmar identidade visual com o usuário.
-2. Criar API Express e migrações PostgreSQL para usuárias, gestações, compromissos, registros, lembretes e eventos de auditoria.
-3. Implementar autenticação e autorização por proprietária em cada recurso; hash de senha, sessão segura, HTTPS, validação no servidor, política de retenção e direitos sobre dados. A escolha de sessão/JWT deve ser documentada.
-4. Integrar cinco tipos de lembretes reais (consultas, exames, vacinas, medicamentos, medições), com permissão explícita, conteúdo discreto e fallback interno.
-5. Documentar e validar pelo menos dez regras com fontes oficiais, revisão profissional e limites explícitos. Não inventar limiares clínicos para preencher a meta.
-6. Integrar IA somente pelo servidor, com chave secreta, minimização dos dados enviados, limites de uso e testes de diagnóstico/prescrição e sinais de alerta. A IA não deve decidir classificação clínica.
-7. Criar pelo menos trinta cenários funcionais, meta de 90% de aprovação, testes de acessibilidade e avaliação com dez usuários conforme procedimentos institucionais.
+| Primeiro plano / fundo | Razão |
+|---|---:|
+| #392d46 / #fcfaff | 12,37:1 |
+| #685b73 / #f2ebf8 | 5,41:1 |
+| #ffffff / #70438a | 7,35:1 |
+| #9986a5 / #ffffff (borda) | 3,33:1 |
+| #74325c / #fcebf2 | 7,78:1 |
 
-## Referências do projeto de interface
+## Verificações executadas
 
-- Nielsen Norman Group: https://www.nngroup.com/articles/ten-usability-heuristics/
+- Nove páginas: idioma, título, um h1/main, IDs únicos, destinos de referências ARIA, rótulos de todos os inputs/selects/textareas e link de salto presentes.
+- Sintaxe de todos os scripts frontend.
+- Cinco cenários da IA com DOM/API simulados: pergunta vazia, consentimento ausente, resposta/fonte, falha de envio preservando pergunta e nova tentativa após falha de disponibilidade.
+- 34 testes backend aprovados; não são testes WCAG.
+- Nenhuma chamada paga de IA foi executada.
+- Não foi possível executar navegador automatizado: Chromium ausente e download falhou. Não houve verificação visual, axe ou leitor de tela nesta rodada.
+
+## Roteiro de aceitação pendente
+
+Registrar commit, navegador, sistema, data, responsável e evidências por item. Usar dados fictícios.
+
+1. Percorrer cadastro/login, painel/perfil, agenda, registros, gráficos, histórico, senha, IA, resumo e ajuda usando Tab/Shift+Tab, Enter, Espaço e Escape.
+2. Conferir foco ao abrir, cancelar, salvar, excluir, paginar, falhar e tentar novamente; examinar foco nas bordas de regiões roláveis.
+3. Verificar 200% de ampliação, 400% e viewport de 320 CSS px. Testar texto com espaçamento de linha 1,5, parágrafos 2em, letras 0,12em e palavras 0,16em.
+4. NVDA com navegador compatível: rótulos/unidades, títulos, diálogos, erros, mensagens, estados selecionados, resultado da IA e tabela do gráfico.
+5. Conferir contraste dos estados restantes, cores forçadas e geometria de alvos; validar retrato e paisagem.
+6. Revisar expiração de sessão e recuperação dos dados preenchidos; concluir processos de autenticação com gerenciador e colagem de senha.
+7. Rodar scanner automatizado como apoio e inspecionar os problemas; resultados de scanner não certificam a página.
+8. Executar os 30 cenários funcionais e protocolo de usabilidade com dez participantes, separadamente.
+
+Falhas devem virar pendências com critério afetado, reprodução, impacto, correção e reteste. Só declarar conformidade após avaliar todos os critérios A/AA aplicáveis nas páginas e processos completos.
+
+## Referências
+
 - W3C WCAG 2.2: https://www.w3.org/TR/WCAG22/
-- Referência rápida: https://www.w3.org/WAI/WCAG22/quickref/
-
-## Verificação desta entrega
-
-Sintaxe JavaScript, contraste da paleta e testes de lógica com DOM simulado verificados por ferramentas locais. Os testes cobrem as seis telas, escape de conteúdo, validação obrigatória, criação e edição de registro. Nenhum navegador automatizado ou leitor de tela foi utilizado nesta etapa; nenhuma conformidade completa foi comprovada. Os testes manuais permanecem obrigatórios antes da versão funcional real.
-
-## Atualização visual de 5 de outubro de 2026
-
-Paleta solicitada pelo usuário: branco, lilás claro e rosa suave nos fundos; roxo e ameixa nos textos, botões e foco para preservar contraste. Contrastes calculados: texto #392d46 sobre #fcfaff, texto secundário #685b73 sobre #fcfaff, branco sobre botão #70438a e borda #9986a5 sobre branco. Testes manuais de acessibilidade continuam pendentes.
-
-## Espaço reservado para IA
-
-A área Orientações contém a seção Assistente GestarBem, com aviso Em breve, temas ilustrativos e formulário indisponível. Há acesso pelo painel. Nenhum envio, interpretação clínica ou compartilhamento com IA está implementado. Na integração futura, preservar limites informativos, minimização dos dados e validação de respostas definidos no pré-projeto.
-
-## Executar o protótipo do repositório
-
-Sirva a pasta frontend com um servidor estático (por exemplo, extensão Live Server do VS Code). Não há instalação de dependências para o frontend. Para verificar a lógica, execute na raiz do repositório: `node tests/interface.test.cjs`. Node.js deve estar instalado. O teste usa DOM simulado; não comprova conformidade WCAG.
+- Nielsen Norman Group: https://www.nngroup.com/articles/ten-usability-heuristics/
+- Protocolo de usabilidade: testes-usabilidade.md
+- Cenários funcionais: testes-funcionais.md
