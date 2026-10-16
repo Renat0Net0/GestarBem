@@ -1,3 +1,25 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="GestarBem — protótipo acadêmico para organizar o acompanhamento pré-natal."><title>Meu painel | GestarBem</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
-<body><a class="skip" href="#main">Pular para o conteúdo</a><div class="layout"><aside><a class="brand" href="#painel"><span aria-hidden="true" class="mark">g</span>GestarBem<span class="brand-sub">Sua gestação, mais organizada</span></a><p class="nav-label">MEU ACOMPANHAMENTO</p><nav aria-label="Navegação principal"><a href="#painel">◈ <span>Meu painel</span></a><a href="#agenda">▦ <span>Agenda e lembretes</span></a><a href="#registros">♡ <span>Meus registros</span></a><a href="#orientacoes">✧ <span>Orientações</span></a><a href="#perfil">○ <span>Meu perfil</span></a><a href="#ajuda">? <span>Ajuda e acessibilidade</span></a></nav><div class="side-note"><strong>Um passo de cada vez.</strong><p>Um espaço para organizar o seu acompanhamento, no seu ritmo.</p><span aria-hidden="true">♡</span></div><p class="academic">Projeto acadêmico · FAMETRO<br>Protótipo em desenvolvimento</p></aside><div class="workspace"><header><span>Seu espaço de acompanhamento</span><span class="demo">Demonstração · dados fictícios</span></header><main id="main" tabindex="-1"></main><footer>GestarBem · Apoio à organização do pré-natal. Não substitui o acompanhamento profissional.<br>Os dados desta demonstração são temporários e desaparecem ao recarregar. Use apenas informações fictícias.</footer></div></div><div id="status" role="status" aria-live="polite"></div><dialog id="dialog" aria-labelledby="dialog-title"><form id="record-form" novalidate><div class="dialog-head"><h2 id="dialog-title">Novo registro</h2><button type="button" id="close" aria-label="Fechar formulário">×</button></div><p id="form-help">Preencha os campos obrigatórios, identificados com “obrigatório”. Use dados fictícios.</p><div id="fields"></div><p id="form-error" role="alert"></p><div class="actions"><button type="button" id="cancel" class="secondary">Cancelar</button><button type="submit">Salvar</button></div></form></dialog></body></html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="GestarBem — organize seu acompanhamento pré-natal, compromissos e registros em um só lugar.">
+<title>GestarBem | Acompanhamento pré-natal</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo</a>
+<main id="main" class="auth-shell" tabindex="-1">
+<a class="brand" href="index.html"><span class="mark" aria-hidden="true">g</span>GestarBem</a>
+<section class="card" aria-labelledby="welcome-title">
+<h1 id="welcome-title">Sua gestação, mais organizada</h1>
+<p>Reúna seus compromissos, registros e informações do acompanhamento pré-natal em um só lugar.</p>
+<p>Acesse sua conta para consultar a agenda, configurar lembretes, registrar informações e conversar com o Assistente GestarBem.</p>
+<div class="actions"><a class="button" href="login.html">Entrar ou criar minha conta</a></div>
+</section>
+<p class="soft">O GestarBem não substitui o acompanhamento profissional. Para dúvidas sobre sua saúde, procure sua equipe de saúde.</p>
+<p><a href="help.html">Ajuda e privacidade</a></p>
+</main>
+</body>
+</html>
