@@ -1,6 +1,6 @@
 import {loadAssistantContext} from './assistant-context.mjs';
 import {whoSources} from './assistant-knowledge.mjs';
-export const assistantInstructions=`Você é o Assistente pessoal GestarBem, em português brasileiro, em demonstração com dados fictícios.
+export const assistantInstructions=`Você é o Assistente pessoal GestarBem, em português brasileiro.
 Use o contexto da conta para resumir registros, organizar compromissos e preparar perguntas para consultas. Explique o que está registrado, sem concluir que a gestação está normal ou em risco. Estimativa de semanas não é datação clínica.
 Responda dúvidas educativas sobre gestação SOMENTE com base nas sínteses OMS fornecidas. Se não houver base suficiente, diga que a base desta versão não cobre a pergunta e sugira conversar com o profissional. Não invente referências, doses ou fatos.
 Indique no texto IDs OMS-01/02/03 junto às afirmações sustentadas e liste os IDs usados em sourceIds. Retorne sourceIds vazio quando apenas resumir os dados da conta ou explicar o site.
@@ -11,7 +11,7 @@ Recursos do site: perfil, agenda e registros, lembretes internos 0/1/2/7 dias an
 Seja breve, acolhedor e claro. Não peça dados pessoais. Cada pergunta é independente.`;
 export function assistantErrors(body){
  const errors={};if(!body||typeof body!=='object'||Array.isArray(body)||typeof body.message!=='string'||!body.message.trim()||body.message.length>1000)errors.message='Escreva uma pergunta de até 1.000 caracteres.';
- if(body?.consent!==true)errors.consent='Confirme o envio da pergunta e do contexto fictício da conta à OpenAI.';return errors;
+ if(body?.consent!==true)errors.consent='Confirme o envio da pergunta e do contexto da conta à OpenAI.';return errors;
 }
 export function registerAssistant(app,pool,requireUser,limiter,{env=process.env,fetchImpl=fetch}={}){
  const pending=new Set();
@@ -27,9 +27,9 @@ export function registerAssistant(app,pool,requireUser,limiter,{env=process.env,
    const context=await loadAssistantContext(pool,req.user.id);
    // Reserva persistente e atômica: falhas também consomem tentativa; reinício não zera.
    const budgetKey=(env.AI_BUDGET_KEY||'demo-1').slice(0,80);
-   if(maxCalls()<1)return res.status(429).json({message:'Envios de IA desativados pelo limite da demonstração.'});
+   if(maxCalls()<1)return res.status(429).json({message:'Envios de IA desativados pelo limite de uso.'});
    const reserved=await pool.query("INSERT INTO assistant_usage(budget_key,call_count) VALUES($1,1) ON CONFLICT(budget_key) DO UPDATE SET call_count=assistant_usage.call_count+1 WHERE assistant_usage.call_count<$2 RETURNING call_count",[budgetKey,maxCalls()]);
-   if(!reserved.rows.length)return res.status(429).json({message:'O limite total de chamadas desta demonstração foi atingido.'});
+   if(!reserved.rows.length)return res.status(429).json({message:'O limite total de chamadas do assistente foi atingido.'});
    const response=await fetchImpl('https://api.openai.com/v1/responses',{
     method:'POST',headers:{Authorization:'Bearer '+env.OPENAI_API_KEY,'Content-Type':'application/json'},signal:AbortSignal.timeout(30000),
     body:JSON.stringify({model:env.OPENAI_MODEL,instructions:assistantInstructions,input:JSON.stringify({question:req.body.message.trim(),accountContext:context,educationalSources:whoSources}),store:false,max_output_tokens:900,
