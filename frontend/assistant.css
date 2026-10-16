@@ -1,1 +1,2 @@
 .assistant-answer{white-space:pre-wrap;overflow-wrap:anywhere}#ai-consent{display:inline-block;width:auto;min-height:0;margin-right:8px;vertical-align:middle}#ai-space [tabindex='-1']:focus{outline:3px solid #70438a;outline-offset:4px}
+.auth-shell .ai-consent-label{display:flex;gap:12px;align-items:flex-start;min-height:44px;padding:10px 0;cursor:pointer}.auth-shell #ai-consent{flex:0 0 24px;width:24px;height:24px;min-height:24px;padding:0;margin:0;accent-color:#70438a}.ai-consent-label:focus-within{outline:2px solid #74325c;outline-offset:3px}
