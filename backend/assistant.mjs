@@ -35,7 +35,20 @@ export function registerAssistant(app,pool,requireUser,limiter,{env=process.env,
     body:JSON.stringify({model:env.OPENAI_MODEL,instructions:assistantInstructions,input:JSON.stringify({question:req.body.message.trim(),accountContext:context,educationalSources:whoSources}),store:false,max_output_tokens:900,
      text:{format:{type:'json_schema',name:'gestarbem_answer',strict:true,schema:{type:'object',properties:{answer:{type:'string'},sourceIds:{type:'array',items:{type:'string',enum:whoSources.map(s=>s.id)}}},required:['answer','sourceIds'],additionalProperties:false}}}})
    });
-   if(!response.ok)return res.status(response.status===429?429:502).json({message:response.status===429?'O provedor atingiu seu limite. Confira os créditos ou aguarde.':'Não foi possível consultar a IA. Confira a configuração e tente mais tarde.'});
+   if (!response.ok) {
+  const details = await response.json().catch(() => ({}));
+
+  console.error('Falha da API OpenAI:', {
+    status: response.status,
+    code: details.error?.code,
+    type: details.error?.type,
+    param: details.error?.param
+  });
+
+  return res.status(response.status === 429 ? 429 : 502).json({
+    message: 'Não foi possível consultar a IA. Confira a configuração e tente mais tarde.'
+  });
+  }
    const data=await response.json();
    const raw=(data.output||[]).filter(x=>x.type==='message'&&x.role==='assistant').flatMap(x=>x.content||[]).filter(x=>x.type==='output_text').map(x=>x.text||'').join('');
    if(data.status!=='completed'||!raw)throw new Error('Incomplete');
