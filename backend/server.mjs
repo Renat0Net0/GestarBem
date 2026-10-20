@@ -51,6 +51,23 @@ app.get('/',(_req,res)=>res.redirect('/login.html'));
 app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url))));
 app.use('/api',(_req,res)=>res.status(404).json({message:'Recurso não encontrado.'}));
 app.use((err,_req,res,_next)=>{if(err.type==='entity.parse.failed')return res.status(400).json({message:'Formato JSON inválido.'});if(err.type==='entity.too.large')return res.status(413).json({message:'Solicitação muito grande.'});console.error('Falha interna:',err.code||err.name);res.status(500).json({message:'Não foi possível concluir. Tente novamente mais tarde.'});});
-await pool.query('SELECT 1');const server=app.listen(Number(process.env.PORT||3000),'127.0.0.1',()=>console.log('GestarBem iniciado em',origin));
-const cleanup=setInterval(()=>pool.query('DELETE FROM sessions WHERE expires_at<=now()').catch(()=>console.error('Falha ao limpar sessões.')),3600000);cleanup.unref();
-process.on('SIGTERM',()=>{clearInterval(cleanup);server.close(()=>pool.end());});
+await pool.query('SELECT 1');
+
+const port = Number(process.env.PORT || 3000);
+
+const server = app.listen(port, '0.0.0.0', () => {
+  console.log('GestarBem iniciado em', origin);
+  console.log('Servidor ouvindo na porta', port);
+});
+
+const cleanup = setInterval(() => {
+  pool.query('DELETE FROM sessions WHERE expires_at <= now()')
+    .catch(() => console.error('Falha ao limpar sessões.'));
+}, 3600000);
+
+cleanup.unref();
+
+process.on('SIGTERM', () => {
+  clearInterval(cleanup);
+  server.close(() => pool.end());
+});
