@@ -1,0 +1,19 @@
+.auth-shell{width:min(100%,540px);padding:16px 20px;line-height:1.45}
+.auth-shell>.brand{display:block;margin-bottom:14px;font-size:24px}
+.auth-shell .card{padding:20px;margin-bottom:12px}
+.auth-shell h1{margin:0 0 6px;font-size:28px}
+.auth-shell p{margin:0 0 10px;overflow-wrap:anywhere}
+.auth-shell form{display:grid;gap:4px}
+.auth-shell label{margin:6px 0 2px;font-weight:bold}
+.auth-shell input{width:100%;min-height:44px;padding:8px 10px}
+.auth-shell .actions{flex-wrap:wrap;margin:8px 0 12px;gap:8px}
+.auth-shell .actions button{flex:1 1 150px}
+.auth-shell #show-password{justify-self:end;padding:8px 12px;margin:0}
+.auth-shell #password-help{font-size:13px;margin:2px 0 0}
+.auth-shell .field-error,.auth-shell #auth-error{color:#74325c;margin:0}
+.auth-shell .field-error:empty{display:none}
+.auth-shell #auth-status{margin:0}
+.auth-shell #name-group,.auth-shell #confirm-group{display:grid;gap:4px}
+.auth-shell [hidden]{display:none!important}
+.auth-shell button:disabled{cursor:wait;opacity:.7}
+@media(max-width:380px){.auth-shell{padding:12px}.auth-shell .card{padding:16px}.auth-shell h1{font-size:25px}}
