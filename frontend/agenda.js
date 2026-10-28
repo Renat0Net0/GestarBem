@@ -38,7 +38,7 @@ function calendarRender(items){
   const button=node('button',String(day));button.type='button';button.className='calendar-day';button.disabled=busy;
   button.setAttribute('aria-label',day+' de '+title+', '+entries.length+' compromisso(s)'+(key===today()?', hoje':''));
   button.setAttribute('aria-pressed',String(selectedDay===key));if(key===today()){button.classList.add('is-today');button.setAttribute('aria-current','date');}
-  if(entries.length){button.append(node('span',entries.length+' compromisso(s)'));for(const event of entries.slice(0,2)){const preview=node('span',event.time+' '+event.title+(event.done?' · concluído':''));preview.className='calendar-preview';button.append(preview);}if(entries.length>2)button.append(node('span','+'+(entries.length-2)+' outro(s)'));}
+  for(const event of [...entries].sort((a,b)=>a.time.localeCompare(b.time))){const preview=node('span','');preview.className='calendar-preview';const title=node('span',event.title);title.className='calendar-event-title';const time=node('span',event.time.slice(0,5));time.className='calendar-event-time';preview.append(title,time);button.append(preview);}
   button.onclick=()=>{if(busy)return;selectedDay=key;page=1;render();el('list-title').focus();};cell.append(button);
  }
  el('calendar-clear-day').hidden=!selectedDay;
