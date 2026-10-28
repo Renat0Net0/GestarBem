@@ -24,7 +24,7 @@
   for(const record of records)entry(el('summary-records'),record.value,record.type+' · '+date(record.date),record.notes);
   if(!events.length)el('summary-events').append(text('p','Nenhum compromisso cadastrado.'));
   if(!records.length)el('summary-records').append(text('p','Nenhum registro cadastrado.'));
-  ready=true;el('summary-content').hidden=false;el('print-summary').disabled=false;el('summary-status').textContent='Resumo completo. Confira as informações antes de imprimir.';
+  ready=true;el('summary-content').hidden=false;el('print-summary').disabled=false;el('summary-status').textContent='';
  }catch(error){clear();el('summary-status').textContent='';el('summary-error').textContent=error.message||'Não foi possível carregar o resumo. Tente novamente.';}
  finally{busy=false;el('reload-summary').disabled=false;el('main').removeAttribute('aria-busy');}}
  el('print-summary').onclick=()=>{if(ready&&!busy)window.print();};

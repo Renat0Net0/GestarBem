@@ -17,3 +17,9 @@
 .auth-shell [hidden]{display:none!important}
 .auth-shell button:disabled{cursor:wait;opacity:.7}
 @media(max-width:380px){.auth-shell{padding:12px}.auth-shell .card{padding:16px}.auth-shell h1{font-size:25px}}
+
+/* Reflow and target sizes for account controls at high zoom. */
+.auth-shell input,.auth-shell select,.auth-shell textarea{max-width:100%;min-width:0}
+.auth-shell input[type="checkbox"]{width:24px;min-height:24px}
+.auth-shell select{width:100%;min-height:44px}
+.auth-shell a,.auth-shell button{overflow-wrap:anywhere}
