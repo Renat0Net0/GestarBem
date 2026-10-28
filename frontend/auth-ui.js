@@ -18,6 +18,6 @@ if(document.body.dataset.authPage==='login'){
  };
  request('me').then(()=>location.replace('account.html')).catch(error=>{if(error.status!==401)message(error);});
 }else{
- async function load(){ $('retry').hidden=true;$('auth-error').textContent='';try{const {user}=await request('me');$('account-name').textContent='Olá, '+user.name+'.';$('account-email').textContent=user.email;$('account-content').hidden=false;$('auth-status').textContent='Sessão ativa.';}catch(error){if(error.status===401){location.replace('login.html');return;}$('auth-status').textContent='';message(error);$('retry').hidden=false;}}
+ async function load(){ $('retry').hidden=true;$('auth-error').textContent='';try{const {user}=await request('me');$('account-name').textContent='Olá, '+user.name+'.';$('account-email').textContent=user.email;$('account-content').hidden=false;$('auth-status').textContent='';}catch(error){if(error.status===401){location.replace('login.html');return;}$('auth-status').textContent='';message(error);$('retry').hidden=false;}}
  $('retry').onclick=load;$('logout').onclick=async()=>{if(busy)return;busy=true;$('logout').disabled=true;$('auth-error').textContent='';try{await request('logout',{});location.replace('login.html');}catch(error){message(error);}finally{busy=false;$('logout').disabled=false;}};load();window.addEventListener('pageshow',event=>{if(event.persisted){$('account-content').hidden=true;load();}});
 }
