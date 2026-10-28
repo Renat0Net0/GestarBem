@@ -1,3 +1,16 @@
+# Atualização de 28/10/2026
+
+Esta atualização prevalece sobre o registro histórico abaixo. Revisão e pendências: [revisao-privacidade-acessibilidade.md](revisao-privacidade-acessibilidade.md).
+
+- Hospedagem Render/Neon e IA foram confirmadas pelo usuário durante a implantação.
+- Implementadas exportação JSON e exclusão transacional da conta com senha/confirmacão.
+- IA oferece modo educativo sem consulta dos registros por padrão e contexto pessoal opcional.
+- 42 testes automatizados de backend passaram com banco/provedor simulados. Não substituem validação PostgreSQL real, 30 cenários formais, dez participantes ou auditoria WCAG/LGPD.
+- Política de retenção, bases legais, controlador, contratos/transferências e validação clínica continuam pendentes. Não declarar conformidade integral.
+- As dez regras atuais dependem de seleção explícita. A diferença em relação ao processamento de registros previsto no pré-projeto deve ser decidida com a orientadora.
+
+## Registro histórico de 12/10/2026
+
 # Estado de implementação — GestarBem
 
 Atualizado em 12/10/2026. Este documento registra implementação, relatos exploratórios e pendências separadamente. Não certifica WCAG, LGPD, segurança clínica ou aprovação dos testes do TCC.

@@ -5,6 +5,7 @@ import pg from 'pg';
 import {randomUUID,randomBytes} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {hashPassword,verifyPassword,registrationErrors,tokenHash} from './auth.mjs';
+import {registerAccountData} from './account-data.mjs';
 import {registerAccountSettings} from './account-settings.mjs';
 import {registerAssistant} from './assistant.mjs';
 import {registerActivity} from './activity.mjs';
@@ -46,6 +47,7 @@ registerActivity(app,pool,requireUser);
 const aiLimiter=rateLimit({windowMs:60000,limit:4,keyGenerator:req=>req.user.id,standardHeaders:'draft-8',legacyHeaders:false,message:{message:'Aguarde: limite de quatro perguntas por minuto.'}});
 registerAssistant(app,pool,requireUser,aiLimiter);
 registerAccountSettings(app,pool,requireUser,authLimiter,cookieName);
+registerAccountData(app,pool,requireUser,authLimiter,cookieName);
 // Entrada autenticada; index.html conserva a demonstração independente.
 app.get('/',(_req,res)=>res.redirect('/login.html'));
 app.use(express.static(fileURLToPath(new URL('../frontend/',import.meta.url))));

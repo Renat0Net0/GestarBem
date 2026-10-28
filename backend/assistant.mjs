@@ -11,6 +11,7 @@ Recursos do site: perfil, agenda e registros, lembretes internos 0/1/2/7 dias an
 Seja breve, acolhedor e claro. Não peça dados pessoais. Cada pergunta é independente.`;
 export function assistantErrors(body){
  const errors={};if(!body||typeof body!=='object'||Array.isArray(body)||typeof body.message!=='string'||!body.message.trim()||body.message.length>1000)errors.message='Escreva uma pergunta de até 1.000 caracteres.';
+ if(body?.includeContext!==undefined&&typeof body.includeContext!=='boolean')errors.includeContext='Escolha um modo válido.';
  if(body?.consent!==true)errors.consent='Confirme o envio da pergunta e do contexto da conta à OpenAI.';return errors;
 }
 export function registerAssistant(app,pool,requireUser,limiter,{env=process.env,fetchImpl=fetch}={}){
@@ -24,7 +25,9 @@ export function registerAssistant(app,pool,requireUser,limiter,{env=process.env,
   if(pending.has(req.user.id))return res.status(429).json({message:'Aguarde a resposta anterior.'});
   pending.add(req.user.id);
   try{
-   const context=await loadAssistantContext(pool,req.user.id);
+   const context=req.body.includeContext!==true
+    ? {estimatedWeeks:null,upcomingEvents:[],recentRecords:[],limitations:'Modo educativo: nenhum registro da conta foi consultado ou enviado.'}
+    : await loadAssistantContext(pool,req.user.id);
    // Reserva persistente e atômica: falhas também consomem tentativa; reinício não zera.
    const budgetKey=(env.AI_BUDGET_KEY||'demo-1').slice(0,80);
    if(maxCalls()<1)return res.status(429).json({message:'Envios de IA desativados pelo limite de uso.'});

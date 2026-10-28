@@ -2,7 +2,7 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {assistantErrors,registerAssistant} from './assistant.mjs';
 import {loadAssistantContext,manausToday} from './assistant-context.mjs';
 const env={AI_ENABLED:'true',OPENAI_API_KEY:'chave-ficticia',OPENAI_MODEL:'gpt-4.1-mini',AI_MAX_CALLS:'2'};
-const body={message:'Resuma meu acompanhamento.',consent:true};
+const body={message:'Resuma meu acompanhamento.',consent:true,includeContext:true};
 function fixture({configured=env,quota=true,fetchImpl}={}){
  const calls=[],routes={};const pool={async query(sql,args){calls.push({sql,args});if(sql.includes('assistant_usage'))return {rows:quota?[{call_count:1}]:[]};if(sql.includes('gestational_profiles'))return {rows:[{dum:'2026-08-01',name:'nao-enviar',notes:'privado'}]};if(sql.includes('gestational_events'))return {rows:[{title:'Consulta fictícia',type:'Consulta',date:'2026-10-20',time:'09:00',user_id:'nao-enviar'}]};return {rows:[{type:'Peso',value:'68 kg',date:'2026-10-12',notes:'nao-enviar'}]};}};
  function guard(){}function limit(){}const app={get(path,m,fn){assert.equal(m,guard);routes[path]=fn;},post(path,m,l,fn){assert.equal(m,guard);assert.equal(l,limit);routes[path]=fn;}};
@@ -49,4 +49,20 @@ test('bloqueia chamada concorrente e libera após resposta',async()=>{
  const first=f.run();while(!release)await new Promise(setImmediate);
  assert.equal((await f.run()).code,429);release();await first;
  const next=f.run();release=undefined;while(!release)await new Promise(setImmediate);release();await next;
+});
+
+test('modo educativo e campo ausente não consultam nem enviam registros pessoais',async()=>{
+ for(const includeContext of [false,undefined]){
+  let payload;
+  const f=fixture({fetchImpl:async(_url,opt)=>{
+   payload=JSON.parse(opt.body);
+   return {ok:true,json:async()=>({status:'completed',output:[{type:'message',role:'assistant',content:[{type:'output_text',text:JSON.stringify({answer:'Orientação educativa.',sourceIds:[]})}]}]})};
+  }});
+  assert.equal((await f.run({...body,includeContext})).code,200);
+  assert.equal(f.calls.some(c=>c.sql.includes('gestational_')),false);
+  assert.equal(payload.input.includes('68 kg'),false);
+ }
+});
+test('modo de contexto inválido é recusado antes de consultar banco',async()=>{
+ const f=fixture();assert.equal((await f.run({...body,includeContext:'true'})).code,422);assert.equal(f.calls.length,0);
 });
