@@ -21,3 +21,10 @@
 .agenda-shell .records-controls{display:flex;flex-wrap:nowrap;gap:10px;margin:14px 0}.agenda-shell .records-controls button{display:flex;justify-content:center;align-items:center;gap:6px;flex:1 1 0;min-width:0;min-height:44px}.records-controls #new-event span{font-size:22px;line-height:1}
 
 .calendar-scroll{padding:3px}.calendar-day:focus-visible{outline-offset:-3px}.agenda-shell .calendar-view-controls{flex-wrap:wrap}.agenda-shell .calendar-view-controls button{flex:1 1 100px}.calendar-view-controls svg{order:-1}
+
+/* Calendar entries display only their title and scheduled time. */
+.auth-shell .calendar-day{text-decoration:none;justify-content:flex-start;min-width:0}
+.calendar-day span{text-decoration:none}
+.calendar-day .calendar-preview{display:flex;flex-direction:column;gap:2px;width:100%;padding:5px 6px;text-decoration:none;line-height:1.35}
+.calendar-day .calendar-event-title{font-weight:600;overflow-wrap:anywhere;text-decoration:none}
+.calendar-day .calendar-event-time{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted);text-decoration:none}
