@@ -1,3 +1,5 @@
+> Atualização: o fluxo atual fica no formulário de Sintoma em `frontend/records.html`, controlado por `frontend/records.js`. O antigo script `attention.js` foi removido por não ser utilizado. O texto abaixo registra a proposta anterior e não descreve a localização atual.
+
 # Regras de atenção — proposta v1
 
 Estado: dez seleções e orientação integradas ao painel. Verificações locais de estrutura e lógica realizadas; validação manual visual, de acessibilidade e clínica pendente. Pesquisa consultada em 11/10/2026.
@@ -55,7 +57,7 @@ Cada uma das dez seleções deve produzir a orientação; múltiplas seleções 
 
 ## Integração local
 
-Atualizar frontend/account.html e dashboard.css; acrescentar frontend/attention.js. Recarregar com Ctrl+F5. Não há migração nem alteração de API. A seção fica antes do espaço de IA; os lembretes mantêm seu próprio card.
+Na implementação atual, os sinais de atenção são apresentados no formulário de Sintoma em frontend/records.html e tratados por frontend/records.js. Não há seção separada no painel.
 
 O texto de orientação e os sinais permanecem disponíveis sem JavaScript. Com JavaScript, cada seleção atualiza a lista de sinais e uma mensagem de estado sem mover o foco. Limpar seleção retorna o foco à primeira opção, sem afirmar resolução. Ao recarregar ou retornar pelo histórico, a seleção é limpa.
 

@@ -4,7 +4,7 @@ Revisão de 15/10/2026. A meta permanece WCAG 2.2 nível AA, abrangendo critéri
 
 ## Escopo atual
 
-Entrada, login/cadastro, painel/perfil/assistente, agenda, registros/gráficos, histórico, configurações, resumo e ajuda. Frontend HTML/CSS/JavaScript servido pelo backend Express com PostgreSQL. A tela antiga em app.js não é carregada pela entrada atual e não integra esta revisão; não reativá-la sem avaliação.
+Entrada, login/cadastro, painel/perfil/assistente, agenda, registros/gráficos, histórico, configurações, resumo e ajuda. Frontend HTML/CSS/JavaScript servido pelo backend Express com PostgreSQL. A demonstração antiga e seus scripts sem uso foram removidos. As versões anteriores permanecem no histórico do Git.
 
 ## Correções desta revisão
 
