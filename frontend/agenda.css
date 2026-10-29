@@ -1,0 +1,30 @@
+.agenda-shell{width:min(100%,900px)}.agenda-shell nav{margin-bottom:20px;display:flex;flex-wrap:wrap}.agenda-shell nav a{min-width:160px}.agenda-shell>h1{margin-top:20px}.agenda-shell .event{padding:16px 0}.agenda-shell .event h3{margin:0 0 6px}.agenda-shell .actions button{flex:0 1 auto}.agenda-shell dialog{max-height:calc(100dvh - 32px);overflow:auto;width:min(560px,calc(100% - 24px))}.agenda-shell dialog label{margin-top:10px}.agenda-shell #agenda-error,.agenda-shell #event-error{color:#74325c}.agenda-shell dialog .actions{position:static}.agenda-shell #events-list{overflow-wrap:anywhere}
+.agenda-shell #events-list{display:grid;gap:18px}
+.agenda-shell #events-list>.event{display:block;margin:0;padding:22px;border:1px solid var(--border);border-radius:14px;background:var(--cream);box-shadow:0 3px 10px rgba(57,45,70,.04)}
+.agenda-shell #events-list>.event .event-content{min-width:0}
+.agenda-shell #events-list>.event h3{margin-bottom:10px}
+.agenda-shell #events-list>.event .actions{margin-top:16px;padding-top:14px;border-top:1px solid #e9dfef;gap:10px}
+@media(max-width:380px){.agenda-shell #events-list>.event{padding:16px}.agenda-shell #events-list>.event .actions button{flex:1 1 90px}}
+
+.agenda-shell .list-filters{min-width:0;margin:0 0 12px;padding:16px;border:1px solid var(--border);border-radius:12px}
+.agenda-shell .list-filters legend{padding:0 6px;font-weight:700}
+.agenda-shell .filter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px;margin-bottom:12px}
+.agenda-shell .filter-grid>div{min-width:0;display:grid;align-content:start;gap:4px}
+.agenda-shell .filter-grid input,.agenda-shell .filter-grid select{width:100%;min-height:44px}
+
+.calendar-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}.calendar-toolbar h3{flex:1 1 180px;margin:0;text-transform:capitalize}.calendar-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin-bottom:14px}.calendar-table{width:100%;min-width:630px;table-layout:fixed;border-collapse:collapse}.calendar-table caption{text-align:left;padding:12px;font-weight:700}.calendar-table th{padding:10px;background:#f2ebf8}.calendar-table td{border:1px solid var(--border);vertical-align:top;padding:4px;height:112px}.auth-shell .calendar-day{width:100%;min-height:100px;margin:0;padding:8px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;white-space:normal;background:#fff;color:#392d46;border:1px solid transparent;border-radius:8px;text-align:left}.calendar-day span{font-size:12px;overflow-wrap:anywhere;max-width:100%}.calendar-day .calendar-preview{padding:3px;background:#f2ebf8;border-radius:4px}.auth-shell .calendar-day.is-today{border-color:#74325c}.auth-shell .calendar-day[aria-pressed=true]{background:#fcebf2;border:2px solid #74325c}.calendar-view-controls{margin-bottom:12px}#calendar-section{margin-bottom:20px}
+
+.agenda-shell .calendar-toolbar{margin:0 0 18px}.calendar-period-choice{display:flex;gap:12px;flex:1 1 100%;align-items:end}.calendar-period-choice>div{display:grid;gap:4px;min-width:0}.calendar-period-choice label{margin:0}.calendar-period-choice select{min-height:44px;min-width:100px}.calendar-period-choice>div:first-child{flex:1}.calendar-toolbar #calendar-month{flex:1 1 140px}.agenda-shell .calendar-view-controls{display:flex;flex-wrap:nowrap;gap:8px;align-items:stretch}.agenda-shell .calendar-view-controls button{flex:1 1 0;min-width:0;padding:10px 6px;white-space:normal;font-size:14px}
+
+.agenda-shell .calendar-heading{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:12px;align-items:center;margin:16px 0}.calendar-heading #calendar-month{margin:0;text-align:center;text-transform:none;font-size:20px;overflow-wrap:anywhere}.agenda-shell .calendar-arrow{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px;margin:0}.calendar-table caption{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.agenda-shell .calendar-view-controls button{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px}.calendar-view-controls svg{flex:0 0 22px}.calendar-view-controls #new-event span{font-size:22px;line-height:1}@media(max-width:380px){.calendar-heading #calendar-month{font-size:17px}.agenda-shell .calendar-view-controls button{font-size:13px;padding:8px 4px}}
+
+.agenda-shell .records-controls{display:flex;flex-wrap:nowrap;gap:10px;margin:14px 0}.agenda-shell .records-controls button{display:flex;justify-content:center;align-items:center;gap:6px;flex:1 1 0;min-width:0;min-height:44px}.records-controls #new-event span{font-size:22px;line-height:1}
+
+.calendar-scroll{padding:3px}.calendar-day:focus-visible{outline-offset:-3px}.agenda-shell .calendar-view-controls{flex-wrap:wrap}.agenda-shell .calendar-view-controls button{flex:1 1 100px}.calendar-view-controls svg{order:-1}
+
+/* Calendar entries display only their title and scheduled time. */
+.auth-shell .calendar-day{text-decoration:none;justify-content:flex-start;min-width:0}
+.calendar-day span{text-decoration:none}
+.calendar-day .calendar-preview{display:flex;flex-direction:column;gap:2px;width:100%;padding:5px 6px;text-decoration:none;line-height:1.35}
+.calendar-day .calendar-event-title{font-weight:600;overflow-wrap:anywhere;text-decoration:none}
+.calendar-day .calendar-event-time{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted);text-decoration:none}
