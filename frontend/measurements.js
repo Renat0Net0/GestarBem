@@ -23,10 +23,10 @@
   svg.append(svgNode('title',{id:'measurement-svg-title'},'Histórico de '+type+' em '+unit),svgNode('desc',{id:'measurement-svg-desc'},'Medições em ordem de data. Consulte os valores completos na tabela abaixo. Sem limites clínicos ou avaliação de risco.'));
   const values=data.flatMap(r=>r.values),low=Math.min(...values),high=Math.max(...values),padding=Math.max((high-low)*0.15,1),min=Math.max(0,low-padding),max=high+padding;
   const x=i=>data.length===1?335:60+i*550/(data.length-1),y=v=>220-(v-min)*170/(max-min);
-  for(let i=0;i<=4;i++){const value=min+(max-min)*i/4,py=y(value);svg.append(svgNode('line',{x1:60,x2:610,y1:py,y2:py,stroke:'#ddd'}),svgNode('text',{x:52,y:py+4,'text-anchor':'end','font-size':12,fill:'#392d46'},new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1}).format(value)));}
-  const colors=['#74325c','#493c95'];
+  for(let i=0;i<=4;i++){const value=min+(max-min)*i/4,py=y(value);svg.append(svgNode('line',{x1:60,x2:610,y1:py,y2:py,stroke:'#e7dce0'}),svgNode('text',{x:52,y:py+4,'text-anchor':'end','font-size':12,fill:'#30353b'},new Intl.NumberFormat('pt-BR',{maximumFractionDigits:1}).format(value)));}
+  const colors=['#95516e','#45695d'];
   series.forEach((name,k)=>{if(data.length>1)svg.append(svgNode('polyline',{points:data.map((r,i)=>x(i)+','+y(r.values[k])).join(' '),fill:'none',stroke:colors[k],'stroke-width':2,'stroke-dasharray':k?'6 4':'none'}));data.forEach((r,i)=>{const circle=svgNode('circle',{cx:x(i),cy:y(r.values[k]),r:4,fill:colors[k]});circle.append(svgNode('title',{},name+': '+r.values[k]+' '+unit+' em '+r.date.split('-').reverse().join('/')));svg.append(circle);});svg.append(svgNode('text',{x:60+k*230,y:25,'font-size':14,fill:colors[k]},name+' ('+unit+')'+(k?' — linha tracejada':'')));});
-  for(const i of [...new Set([0,Math.floor((data.length-1)/2),data.length-1])])svg.append(svgNode('text',{x:x(i),y:248,'text-anchor':'middle','font-size':12,fill:'#392d46'},data[i].date.split('-').reverse().join('/')));
+  for(const i of [...new Set([0,Math.floor((data.length-1)/2),data.length-1])])svg.append(svgNode('text',{x:x(i),y:248,'text-anchor':'middle','font-size':12,fill:'#30353b'},data[i].date.split('-').reverse().join('/')));
   el('measurements-plot').append(svg);
   el('measurements-caption').textContent='Cada ponto representa uma medição, em ordem de data. Os espaços entre os pontos são iguais e não representam o intervalo de tempo. Medições do mesmo dia aparecem separadas; sua ordem dentro do dia não indica horário.';
   const table=el('measurements-table');table.append(text('caption','Valores de '+type+' apresentados no gráfico'));
