@@ -5,7 +5,7 @@
  --cream:#fbf9f8;--border:#a58392;--rose:#fce0ec;
  --brand-primary:#a53868;--brand-hover:#86264f;--brand-deep:#7c254d;
  --brand-soft:#f8dce8;--surface:#fff;--surface-border:#e7dce0;
- --sage:#5f9b84;--focus:#7c254d;
+ --sage:#d65b91;--focus:#7c254d;
  --font-body:"Segoe UI",Arial,Helvetica,sans-serif;
  --font-greeting:Georgia,"Times New Roman",serif;
 }
@@ -27,7 +27,7 @@ button,.button{font-weight:650}
  button:disabled,textarea:disabled,input:disabled,select:disabled{background:#f0ebed;color:var(--muted);border-color:var(--border)}
  .auth-shell .field-error,.auth-shell #auth-error,.dashboard-shell [role="alert"],.agenda-shell #agenda-error,.agenda-shell #event-error,#form-error{color:var(--brand-deep)}
  .card,.stat,.agenda-shell #events-list>.event{background:var(--surface);border:1px solid var(--surface-border);border-radius:18px;box-shadow:0 8px 26px #633e4d08}
- .dashboard-welcome,.hero{background:linear-gradient(115deg,#fce0ec 0%,#fff8f5 65%,#e2f1e8 100%);border-color:#ecd8e1}
+ .dashboard-welcome,.hero{background:linear-gradient(115deg,#fce0ec 0%,#fff8f5 65%,#f8dce8 100%);border-color:#ecd8e1}
  .dashboard-welcome #account-name,.hero h2{font-family:var(--font-greeting);color:#922b57;font-weight:700;letter-spacing:-.025em}
  .dashboard-stats .card{border-top:4px solid #d65b91}
  .dashboard-stats .card:nth-child(2){border-top-color:var(--sage)}
