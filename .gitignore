@@ -15,3 +15,9 @@ Thumbs.db
 
 .vscode/
 .idea/
+
+# Backups locais do banco; não versionar dados de contas.
+backups/
+*.dump
+*.dump.partial
+*.backup

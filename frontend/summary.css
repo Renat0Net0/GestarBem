@@ -1,0 +1,11 @@
+.summary-notes,.summary-entry p{white-space:pre-wrap;overflow-wrap:anywhere}.summary-entry{padding:14px 0;border-bottom:1px solid var(--border)}.summary-entry h3{margin:0 0 6px}
+@media print{
+ @page{size:A4;margin:18mm}
+ body{display:block!important;background:white!important;color:#111!important;margin:0!important}
+ .no-print{display:none!important}
+ .dashboard-shell{width:100%!important;max-width:none!important;padding:0!important}
+ .dashboard-shell .card{background:white!important;box-shadow:none!important;border:0!important;padding:0!important;margin:0 0 22px!important}
+ .summary-entry{break-inside:avoid;border-color:#bbb}
+ h1,h2,h3{color:#111!important;break-after:avoid}
+ p{orphans:3;widows:3}
+}
